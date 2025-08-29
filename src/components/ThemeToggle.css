@@ -1,0 +1,58 @@
+/* Base styles */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: var(--transition);
+}
+
+/* Floating variant (old behavior) */
+.theme-toggle--floating {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+.theme-toggle--floating:hover {
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.theme-toggle--floating:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Inline variant for navbar */
+.theme-toggle--inline {
+  position: relative;
+  box-shadow: none;
+  background: var(--bg-secondary);
+}
+
+.theme-toggle--inline:hover {
+  background: var(--bg-primary);
+}
+
+/* Size tweaks on small screens */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}
+@media (max-width: 480px) {
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+}
