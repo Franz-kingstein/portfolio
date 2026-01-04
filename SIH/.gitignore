@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+build/
+dist/
+*.egg-info/
+
+# Data and Archives
+archive/
+archive.zip
+derived/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
