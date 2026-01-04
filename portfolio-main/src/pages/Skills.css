@@ -1,0 +1,121 @@
+.skills {
+  background: var(--bg-secondary);
+  padding: clamp(6rem, 12vh, 10rem) 1rem 5rem;
+  scroll-margin-top: 80px;
+}
+
+.skills-grid {
+  display: grid;
+  max-width: min(1400px, 96vw);
+  margin: 0 auto;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(clamp(300px, 32vw, 360px), 1fr)
+  );
+  gap: 2.25rem;
+}
+
+.skill-category {
+  background: var(--bg-primary);
+  padding: clamp(2.25rem, 2.5vw, 3rem);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+}
+
+.skill-category:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px var(--shadow-hover);
+}
+
+.skill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(72px, 7.5vw, 96px);
+  height: clamp(72px, 7.5vw, 96px);
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  border-radius: 50%;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.skill-category h3 {
+  font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.skill-category p {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.skill-tag {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.6rem 1.1rem;
+  border-radius: 25px;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.skill-tag:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .skill-category {
+    padding: 2.25rem;
+  }
+
+  .skill-icon {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-category {
+    padding: 1.5rem;
+  }
+
+  .skill-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+  font-family: var(--font-cursive);
+  font-weight: 800;
+}

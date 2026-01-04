@@ -1,0 +1,388 @@
+/* Contact Section - Inspired by hareesh.web.app and modern portfolio designs */
+.contact {
+  padding: 8rem 0;
+  background: var(--bg-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  /* Add fade-in animation */
+  animation: fadeInUp 1s ease-out;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  /* Add header animation */
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.contact-title {
+  font-family: var(--font-cursive);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.contact-subtitle {
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  align-items: start;
+  /* Add layout animation */
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+  opacity: 0;
+}
+
+/* Contact Info Cards - Clean minimal design */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-card {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  /* Add hover animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+/* Animation delays for staggered effect */
+.contact-info .info-card:nth-child(1) {
+  animation: fadeInLeft 0.8s ease-out 0.6s both;
+  opacity: 0;
+}
+
+.contact-info .info-card:nth-child(2) {
+  animation: fadeInLeft 0.8s ease-out 0.8s both;
+  opacity: 0;
+}
+
+.contact-info .info-card:nth-child(3) {
+  animation: fadeInLeft 0.8s ease-out 1s both;
+  opacity: 0;
+}
+
+.contact-info .info-card:nth-child(4) {
+  animation: fadeInLeft 0.8s ease-out 1.2s both;
+  opacity: 0;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow);
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-primary);
+}
+
+.info-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.info-value:hover {
+  color: var(--accent-primary);
+}
+
+.external-link {
+  opacity: 0;
+  transition: var(--transition);
+  transform: translate(-5px, 5px);
+}
+
+.info-value:hover .external-link {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Social Section */
+.social-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.social-section h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.social-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.social-link:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  transform: translateX(4px);
+}
+
+/* Contact Form - Clean and modern */
+.contact-form-container {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  padding: 3rem;
+  border: 1px solid var(--border-color);
+  /* Add form animation */
+  animation: fadeInRight 0.8s ease-out 0.6s both;
+  opacity: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+  resize: vertical;
+  /* Add subtle hover animation */
+  transform: translateY(0);
+}
+
+.form-field input:hover,
+.form-field textarea:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Submit Button - Inspired by modern portfolio designs */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2rem;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+  /* Add subtle pulse animation */
+  animation: pulse 2s infinite;
+}
+
+.submit-btn:focus {
+  animation: none;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 35px var(--shadow-hover);
+  background: var(--accent-primary);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-btn.submitting {
+  background: var(--accent-primary);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .submit-btn {
+  background: white;
+  color: var(--bg-primary);
+}
+
+[data-theme="dark"] .submit-btn:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .contact {
+    padding: 6rem 0;
+  }
+
+  .contact-header {
+    margin-bottom: 4rem;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  .contact-info .info-card:nth-child(1),
+  .contact-info .info-card:nth-child(2),
+  .contact-info .info-card:nth-child(3),
+  .contact-info .info-card:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
+  .contact-form-container {
+    padding: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 4rem 0;
+  }
+
+  .contact-form-container {
+    padding: 1.5rem;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    padding: 0.875rem 1rem;
+  }
+
+  .submit-btn {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Animation delays for staggered entrance */
+.info-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.info-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.info-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.social-section {
+  animation-delay: 0.4s;
+}
+.contact-form-container {
+  animation-delay: 0.3s;
+}

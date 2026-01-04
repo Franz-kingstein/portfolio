@@ -1,0 +1,343 @@
+/* ============================= */
+/* Projects Section Layout       */
+/* ============================= */
+.projects {
+  background: var(--bg-primary);
+  min-height: 100vh;
+  height: 100vh;
+  padding: clamp(5rem, 8vh, 7rem) 0 2rem;
+  display: flex;
+  align-items: stretch;
+  /* Add fade-in animation */
+  animation: fadeInUp 1s ease-out;
+}
+
+.projects .container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects .section-title {
+  padding-left: 4rem;
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 5rem);
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+/* ============================= */
+/* Projects Grid (Horizontal)    */
+/* ============================= */
+.projects-grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 2rem 0 4rem; /* Removed horizontal padding */
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) transparent;
+}
+
+/* Custom scrollbar styles */
+.projects-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin-inline: 2rem;
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  border-radius: 10px;
+}
+
+.projects-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Add gutters so first/last cards are not clipped */
+.projects-grid::before,
+.projects-grid::after {
+  content: "";
+  flex: 0 0 0; /* Removed gutters for absolute extreme alignment */
+}
+
+/* Also ensure explicit margins as fallback */
+.projects-grid > .flip-card:first-child {
+  margin-left: 0;
+}
+.projects-grid > .flip-card:last-child {
+  margin-right: 0;
+}
+
+/* ============================= */
+/* Flip Card Base                */
+/* ============================= */
+.flip-card {
+  flex: 0 0 clamp(260px, 28vw, 420px);
+  height: clamp(420px, 58vh, 640px);
+  perspective: 1200px;
+  scroll-snap-align: start;
+  /* Add staggered animation for cards */
+  animation: fadeInUp 0.8s ease-out both;
+  opacity: 0;
+}
+
+/* Animation delays for staggered effect */
+.flip-card:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.flip-card:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.flip-card:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.flip-card:nth-child(4) {
+  animation-delay: 1s;
+}
+
+.flip-card:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+.flip-card:nth-child(6) {
+  animation-delay: 1.4s;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.25, 0.85, 0.25, 1),
+    box-shadow 300ms ease;
+  will-change: transform;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Add hover scale effect */
+.flip-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 12px 32px var(--shadow);
+}
+
+/* ============================= */
+/* Back: Title Only              */
+/* ============================= */
+.flip-card-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.flip-title-only {
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ============================= */
+/* Front: Full Content           */
+/* ============================= */
+.flip-card-front {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+}
+
+.flip-image {
+  height: 50%;
+  background: var(--bg-secondary);
+}
+
+.flip-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+}
+
+.flip-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flip-content h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  text-align: center;
+}
+
+.flip-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ============================= */
+/* Tags                          */
+/* ============================= */
+.flip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  justify-content: center; /* center the tags on each line */
+}
+
+.flip-tag {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ============================= */
+/* Front Links (Buttons)         */
+/* ============================= */
+.flip-front-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-block: 0.5rem;
+}
+
+.flip-front-links a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: #fff;
+  box-shadow: 0 6px 14px var(--shadow);
+  transition: transform 250ms ease, box-shadow 250ms ease, opacity 300ms ease;
+  opacity: 0.9;
+}
+
+.flip-front-links a:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 10px 24px var(--shadow-hover);
+  opacity: 1;
+}
+
+/* ============================= */
+/* Accessibility & Focus         */
+/* ============================= */
+.flip-card:focus-visible .flip-card-inner {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+/* ============================= */
+/* Responsive                    */
+/* ============================= */
+@media (max-width: 768px) {
+  .projects .section-title {
+    padding-left: 1.5rem;
+    text-align: left;
+  }
+
+  .projects-grid {
+    padding: 1rem 0 3rem; /* Extreme left/right on mobile too */
+    gap: 1rem;
+  }
+
+  .flip-card {
+    flex: 0 0 80vw; /* Reduced width from 90vw */
+    height: 480px; /* Reduced height from 550px */
+    perspective: 1200px;
+  }
+
+  .flip-card-inner {
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 700ms cubic-bezier(0.25, 0.85, 0.25, 1);
+  }
+
+  .flip-card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+  }
+
+  .flip-card:hover .flip-card-inner,
+  .flip-card-inner.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front {
+    transform: rotateY(180deg);
+  }
+
+  /* Reduce animation delays on mobile for better performance */
+  .flip-card:nth-child(1),
+  .flip-card:nth-child(2),
+  .flip-card:nth-child(3),
+  .flip-card:nth-child(4),
+  .flip-card:nth-child(5),
+  .flip-card:nth-child(6) {
+    animation-delay: 0.2s;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects .section-title {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+}

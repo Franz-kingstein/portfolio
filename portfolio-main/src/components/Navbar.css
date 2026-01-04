@@ -1,0 +1,185 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(26, 26, 26, 0.95);
+}
+
+.navbar.scrolled {
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 20px var(--shadow);
+}
+
+.nav-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-logo {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  text-decoration: none;
+  font-family: var(--font-cursive);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+}
+
+/* Remove the previous ::before pseudo-element if it exists or override it */
+.nav-link::before {
+  display: none;
+}
+
+/* active selection shows full blue background */
+.nav-link.active::before {
+  transform: scaleX(1);
+}
+.nav-link.active {
+  color: #fff;
+}
+
+/* remove underline when active since we have a filled bg */
+.nav-link.active::after {
+  display: none;
+}
+
+/* keyboard accessibility */
+.nav-link:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+.nav-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem; /* add breathing room from right-justified links */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav-container {
+    justify-content: space-between;
+  } /* keep default on mobile */
+  .nav-menu {
+    flex: 0 0 auto;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    padding: 1rem 2rem;
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  .nav-link:hover {
+    background: var(--bg-secondary);
+  }
+
+  .nav-actions {
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 0.5rem;
+  }
+
+  .nav-logo {
+    font-size: 1.5rem;
+  }
+}

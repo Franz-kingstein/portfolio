@@ -1,0 +1,383 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Full-bleed container for hero only */
+.hero .container {
+  max-width: 100%;
+  width: 100%;
+  padding-left: clamp(0.75rem, 4vw, 2.5rem);
+  padding-right: 0; /* remove right padding so right edge is flush */
+}
+
+/* two-column layout */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr min(46vw, 700px); /* left fills, right sized */
+  align-items: start;
+  gap: clamp(1rem, 2vw, 2rem); /* slightly smaller horizontal gap */
+}
+
+.hero-left {
+  min-width: 0;
+  justify-self: start;
+}
+
+.hero-right {
+  min-width: 0;
+  justify-self: end;
+  align-self: start;
+}
+
+.hero-visual {
+  width: min(46vw, 700px);
+  height: min(70vh, 720px);
+  margin: 0; /* hug the right */
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(
+    1200px 600px at 50% 50%,
+    rgba(99, 102, 241, 0.12),
+    transparent 60%
+  );
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.hero-visual canvas,
+.hero-visual iframe,
+.hero-visual > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-content {
+  text-align: left;
+  z-index: 2;
+  position: relative;
+  max-width: 960px;
+  padding-right: clamp(0rem, 4vw, 2.5rem); /* horizontal breathing room only */
+  padding-top: 2rem; /* was 4rem */
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 7.5vw, 6rem);
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 5rem; /* was 8rem */
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  color: var(--text-secondary);
+  margin-bottom: 7rem; /* was 15rem */
+  max-width: 720px;
+  margin-left: 0;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  display: flex;
+  column-gap: clamp(1rem, 2.5vw, 2rem); /* horizontal only */
+  row-gap: 0.75rem; /* minimal vertical gap */
+  justify-content: flex-start;
+  margin-bottom: 5rem; /* was 4rem */
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+  padding: 1.1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.social-links {
+  display: flex;
+  column-gap: clamp(1rem, 2.5vw, 2rem); /* horizontal only */
+  row-gap: 0.5rem; /* minimal vertical gap */
+  justify-content: flex-start;
+  margin-bottom: 1.25rem; /* was 2rem */
+  margin-top: 5rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition);
+  border: 2px solid var(--border-color);
+}
+
+.social-links a svg {
+  width: 28px;
+  height: 28px;
+}
+
+.social-links a:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--shadow-hover);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: var(--transition);
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator:hover {
+  color: var(--accent-primary);
+  background: var(--bg-secondary);
+}
+
+/* Position Spline as background on the right side */
+.hero-spline-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8;
+  transform: translateX(15%); /* Align even more to the right */
+}
+
+.hero-spline-bg canvas,
+.hero-spline-bg iframe,
+.hero-spline-bg > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Tablet/Mobile: make it span width with controlled height */
+@media (max-width: 1024px) {
+  .hero-spline-bg {
+    top: auto;
+    right: 0;
+    left: 0; /* span width */
+    transform: none;
+    width: 100%;
+    aspect-ratio: auto;
+    height: 55vh; /* controlled height */
+    opacity: 0.18;
+  }
+}
+
+/* Keep content above the background Spline */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.hero-background {
+  z-index: 0;
+}
+
+/* Mobile: make Spline more visible */
+@media (max-width: 768px) {
+  .hero-spline-bg {
+    opacity: 0.7;
+  }
+}
+
+/* bring content above background */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Remove framed visual container styles since it's no longer used */
+.hero-right,
+.hero-visual {
+  display: none;
+}
+
+/* Enlarge and center left content within the left half */
+.hero .container {
+  padding-left: clamp(0.75rem, 4vw, 2.5rem);
+  padding-right: 0; /* ensure no right padding here either */
+}
+
+.hero-content {
+  max-width: 1000px;
+  margin-left: 0;
+}
+
+.hero-title {
+  font-size: clamp(3.75rem, 8vw, 6.75rem);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  max-width: 760px;
+}
+
+/* Layout: keep two columns space but with only left content visible */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-links a {
+    width: 52px;
+    height: 52px;
+  }
+
+  .hero-background {
+    opacity: 0.15;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 1rem;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 2rem;
+  }
+
+  .hero-buttons {
+    margin-bottom: 3rem;
+  }
+
+  .social-links a {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Animation delays for staggered effect */
+.hero-title {
+  animation-delay: 0.2s;
+}
+
+.hero-subtitle {
+  animation-delay: 0.4s;
+}
+
+.hero-buttons {
+  animation-delay: 0.6s;
+}
+
+.social-links {
+  animation-delay: 0.8s;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: 1fr; /* stack */
+  }
+  .hero-content {
+    text-align: center;
+    margin: 0 auto;
+    padding-right: 0;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .social-links {
+    justify-content: center;
+  }
+  .hero-spline-bg {
+    width: 100%;
+    opacity: 0.18;
+    right: 0; /* keep flush-right on smaller screens */
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-visual {
+    height: 46vh;
+    border-radius: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-particles {
+    animation: none;
+  }
+}
+
+/* Extra room on ultra-wide screens */
+@media (min-width: 1600px) {
+  .hero-spline-bg {
+    width: min(75vw, 1600px);
+  }
+}
+
+/* 2x scale on larger screens - tuned down to fit viewport */
+@media (min-width: 1025px) {
+  .hero-subtitle {
+    font-size: clamp(2.25rem, 5vw, 3.2rem);
+  }
+  .hero-buttons .btn {
+    padding: 1.6rem 3rem;
+    font-size: 1.4rem;
+  }
+  .social-links a {
+    width: 88px;
+    height: 88px;
+  }
+  .social-links a svg {
+    width: 36px;
+    height: 36px;
+  }
+}
