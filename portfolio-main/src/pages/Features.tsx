@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Features.css';
 import { useTheme } from '../contexts/ThemeContext';
+import { fetchGitHubStats, fetchLeetCodeStats, formatNumber } from '../services/statsService';
 import awsCert from '../assets/certificate/AWS.jpeg';
 import dsCert from '../assets/certificate/Data_science_bootcamp.jpeg';
 import edaCert from '../assets/certificate/EDA.jpeg';
@@ -28,6 +29,22 @@ import vectorSearchCert from '../assets/certificate/Vector_search_MongoDb.jpeg';
 export default function Dashboard() {
   const { isDark } = useTheme();
   const [imageLoadStates, setImageLoadStates] = useState<Record<string, 'loaded' | 'error'>>({});
+  const [gitHubStats, setGitHubStats] = useState<any>(null);
+  const [leetCodeStats, setLeetCodeStats] = useState<any>(null);
+  const [statsLoading, setStatsLoading] = useState(true);
+
+  // Fetch stats on component mount
+  useEffect(() => {
+    const fetchStats = async () => {
+      setStatsLoading(true);
+      const github = await fetchGitHubStats();
+      const leetcode = await fetchLeetCodeStats('Franz_2005');
+      setGitHubStats(github);
+      setLeetCodeStats(leetcode);
+      setStatsLoading(false);
+    };
+    fetchStats();
+  }, []);
 
   // FIXED: Add image load error handling
   const handleImageLoad = (imageId: string) => {
@@ -218,22 +235,40 @@ export default function Dashboard() {
           {/* GitHub Stats - Top Right */}
           <div className="tile gh-stats-tile">
             <h3 className="tile-header">GitHub Stats</h3>
-            <img
-              src={`https://github-readme-stats.vercel.app/api?username=Franz-kingstein&show_icons=true&theme=${isDark ? 'tokyonight' : 'default'}&hide_border=true&border_radius=20&count_private=true`}
-              alt="GitHub Stats"
-              className="tile-media"
-              loading="lazy"
-              decoding="async"
-              onLoad={() => handleImageLoad('github-stats')}
-              onError={() => handleImageError('github-stats')}
-              style={{
-                display: imageLoadStates['github-stats'] === 'error' ? 'none' : 'block',
-                width: '100%',
-                height: 'auto'
-              }}
-            />
-            {/* FIXED: Error fallback */}
-            {imageLoadStates['github-stats'] === 'error' && (
+            {statsLoading ? (
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-secondary)',
+              }}>
+                Loading...
+              </div>
+            ) : gitHubStats ? (
+              <div className="custom-github-stats">
+                <div className="stat-row">
+                  <div className="stat-item">
+                    <span className="stat-label">Repositories</span>
+                    <span className="stat-value">{gitHubStats.totalRepos}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">⭐ Stars</span>
+                    <span className="stat-value">{formatNumber(gitHubStats.totalStars)}</span>
+                  </div>
+                </div>
+                <div className="stat-row">
+                  <div className="stat-item">
+                    <span className="stat-label">👥 Followers</span>
+                    <span className="stat-value">{gitHubStats.followers}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">🔗 Following</span>
+                    <span className="stat-value">{gitHubStats.following}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
               <div style={{
                 flex: 1,
                 display: 'flex',
@@ -250,22 +285,45 @@ export default function Dashboard() {
           {/* GitHub Languages - Right Column */}
           <div className="tile gh-langs-tile">
             <h3 className="tile-header">Languages Used</h3>
-            <img
-              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=Franz-kingstein&layout=donut&theme=${isDark ? 'tokyonight' : 'default'}&hide_border=true&border_radius=20&langs_count=8`}
-              alt="Top Languages"
-              className="tile-media"
-              loading="lazy"
-              decoding="async"
-              onLoad={() => handleImageLoad('github-languages')}
-              onError={() => handleImageError('github-languages')}
-              style={{
-                display: imageLoadStates['github-languages'] === 'error' ? 'none' : 'block',
-                width: '100%',
-                height: 'auto'
-              }}
-            />
-            {/* FIXED: Error fallback */}
-            {imageLoadStates['github-languages'] === 'error' && (
+            {statsLoading ? (
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-secondary)',
+              }}>
+                Loading...
+              </div>
+            ) : gitHubStats && Object.keys(gitHubStats.languages).length > 0 ? (
+              <div className="custom-languages">
+                {Object.entries(gitHubStats.languages)
+                  .sort((a, b) => (b[1] as number) - (a[1] as number))
+                  .slice(0, 8)
+                  .map(([lang, count]: [string, number | unknown]) => {
+                    const countNum = count as number;
+                    const total = Object.values(gitHubStats.languages).reduce((a: number, b: unknown) => a + (b as number), 0);
+                    const percentage = (countNum / total) * 100;
+                    return (
+                      <div key={lang} className="language-item">
+                        <div className="lang-header">
+                          <span className="lang-name">{lang}</span>
+                          <span className="lang-percent">{percentage.toFixed(1)}%</span>
+                        </div>
+                        <div className="lang-bar">
+                          <div
+                            className="lang-fill"
+                            style={{
+                              width: `${percentage}%`,
+                            }}
+                          />
+                        </div>
+                        <span className="lang-count">{countNum} repos</span>
+                      </div>
+                    );
+                  })}
+              </div>
+            ) : (
               <div style={{
                 flex: 1,
                 display: 'flex',

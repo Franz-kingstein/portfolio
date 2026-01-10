@@ -178,18 +178,18 @@
 
 /* --- Dashboard Section --- */
 .features.dashboard {
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  /* Changed background to be lighter */
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
   min-height: 100vh;
   padding: clamp(4rem, 6vh, 5rem) 1rem 2rem;
   display: auto;
   justify-content: center;
   align-items: flex-start;
-  /* Add fade-in animation */
-  animation: fadeInUp 1s ease-out;
 }
 
 [data-theme="dark"] .features.dashboard {
-  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  /* Slightly lighter dark mode background */
+  background: linear-gradient(180deg, #1a1a1a 0%, #1f1f1f 100%);
 }
 
 /* Dashboard container - adjust these values to control the entire page layout */
@@ -209,9 +209,6 @@
   gap: 1rem;
   position: relative;
   z-index: 1;
-  /* Add container animation */
-  animation: fadeInUp 0.8s ease-out 0.2s both;
-  opacity: 0;
 }
 
 /* FIXED: Improved Grid Layout with proper sizing */
@@ -249,87 +246,85 @@
 
 /* FIXED: Improved tile sizing with proper min-heights */
 .tile {
+  /* Lighter tile background with less opacity on the blue tint */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.1)
+    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
   ) !important;
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  box-shadow: 0 10px 30px var(--shadow);
+  /* Softer shadow */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   padding: clamp(1rem, 2vw, 1.5rem);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  /* FIXED: Proper min-height that scales with viewport */
   min-height: clamp(200px, 25vh, 300px);
   overflow: hidden;
   box-sizing: border-box;
-  /* Add tile animation */
-  animation: fadeInUp 0.8s ease-out both;
-  opacity: 0;
 }
 
 /* FIXED: Specific tile styling with better proportions */
 .graph-tile {
+  /* Lighter graph tile */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.15)
+    rgba(59, 130, 246, 0.08) /* Reduced from 0.15 */
   ) !important;
   /* FIXED: Larger min-height for graph tile */
   min-height: clamp(300px, 40vh, 500px);
-  /* Animation delay for staggered effect */
-  animation-delay: 0.4s;
 }
 
 .gh-stats-tile {
+  /* Lighter stats tile */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.1)
+    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
   ) !important;
   /* FIXED: Adequate height for stats */
   min-height: clamp(180px, 22vh, 250px);
-  /* Animation delay for staggered effect */
-  animation-delay: 0.6s;
 }
 
 .gh-langs-tile {
+  /* Lighter langs tile */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.1)
+    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
   ) !important;
   /* FIXED: Height spans two rows effectively */
   min-height: clamp(360px, 45vh, 520px);
-  /* Animation delay for staggered effect */
-  animation-delay: 0.8s;
 }
 
 .leet-tile {
+  /* Lighter leet tile */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.1)
+    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
   ) !important;
   /* FIXED: Adequate height for LeetCode stats */
   min-height: clamp(180px, 22vh, 250px);
-  /* Animation delay for staggered effect */
-  animation-delay: 1s;
 }
 
 .certs-tile {
+  /* Lighter certs tile */
   background: linear-gradient(
     135deg,
     var(--bg-secondary),
-    rgba(59, 130, 246, 0.08)
+    rgba(59, 130, 246, 0.04) /* Reduced from 0.08 */
   ) !important;
-  /* FIXED: Increased height for certificates section */
+  /* Revert to standard height behavior */
   min-height: clamp(350px, 45vh, 500px);
-  /* Animation delay for staggered effect */
+  height: auto;
   animation-delay: 1.2s;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
 }
 
 .tile:hover {
@@ -412,12 +407,10 @@
 
 .cert-showcase {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  padding: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
   width: 100%;
-  /* FIXED: Remove horizontal scroll, use wrap instead */
-  overflow: visible;
 }
 
 .cert-item {
@@ -426,17 +419,14 @@
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  /* FIXED: Better sizing for wrapped grid layout */
-  min-height: 250px;
-  max-height: 320px;
-  /* Add staggered animation for certificate items */
-  animation: fadeInUp 0.6s ease-out both;
-  opacity: 0;
+  height: 100%;
+  /* Softer shadow for cert items */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 /* Animation delays for certificate items */
@@ -460,7 +450,9 @@
 }
 
 .cert-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  /* Softer hover shadow */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .cert-image {
@@ -487,6 +479,7 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -738,3 +731,197 @@
     margin: 0;
   }
 }
+
+/* --- Playbook Scroll Animation --- */
+/* The following classes are no longer used and can be removed or ignored */
+.playbook-container,
+.playbook-grid,
+.playbook-layer,
+.playbook-item,
+.playbook-scaler,
+.scaler-info {
+  display: none;
+}
+
+/* --- Custom GitHub Stats --- */
+.custom-github-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  height: 100%;
+  justify-content: center;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(var(--accent-primary-rgb), 0.05);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Custom LeetCode Stats --- */
+.custom-leetcode-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  height: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.leetcode-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.circle-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+}
+
+.circle-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+.leetcode-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.difficulty {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(var(--accent-primary-rgb), 0.05);
+  border-radius: 10px;
+  border-left: 4px solid var(--border-color);
+}
+
+.difficulty.easy {
+  border-left-color: #52c41a;
+}
+
+.difficulty.medium {
+  border-left-color: #faad14;
+}
+
+.difficulty.hard {
+  border-left-color: #f5222d;
+}
+
+.difficulty-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  min-width: 60px;
+  font-weight: 500;
+}
+
+.difficulty-count {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-left: auto;
+}
+
+/* --- Custom Languages Used --- */
+.custom-languages {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  height: 100%;
+  justify-content: center;
+}
+
+.language-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lang-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.lang-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.lang-percent {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.9rem;
+}
+
+.lang-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.lang-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.lang-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+

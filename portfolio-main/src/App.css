@@ -120,7 +120,7 @@ section {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 25px var(--shadow-hover);
 }
 
@@ -132,7 +132,8 @@ section {
 
 .btn-secondary:hover {
   background: var(--bg-secondary);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--accent-primary);
 }
 
 /* Animations */
@@ -178,6 +179,69 @@ section {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-10px); }
   60% { transform: translateY(-5px); }
+}
+
+/* --- Section Fade-in Animation --- */
+@keyframes section-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply fade-in when entering section */
+section {
+  animation: section-fade-in ease-in-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+  animation-duration: 1.5s;
+}
+
+/* --- Scroll Driven Animations --- */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply to major sections and their children */
+section .container > *,
+.project-card,
+.feature-card,
+.skill-category,
+.section-title,
+.dashboard-container,
+.tile,
+.cert-item {
+  animation: reveal-in ease-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+  animation-duration: 2s;
+}
+
+/* Disable for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  section {
+    animation: none;
+  }
+
+  section .container > *,
+  .project-card,
+  .feature-card,
+  .skill-category,
+  .section-title,
+  .dashboard-container,
+  .tile,
+  .cert-item {
+    animation: none;
+  }
 }
 
 /* Utility classes */
@@ -304,4 +368,98 @@ textarea:focus {
 .about {
   padding: clamp(6rem, 10vh, 8rem) 0;
   scroll-margin-top: 80px;
+}
+
+/* ---- Light Microinteractions ---- */
+
+/* Links */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-primary);
+}
+
+/* Cards and Interactive Elements */
+.flip-card,
+.cert-item,
+.feature-card,
+.tile,
+.skill-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flip-card:hover,
+.cert-item:hover,
+.feature-card:hover,
+.tile:hover,
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Buttons */
+.flip-front-links a,
+.icon-btn,
+button[class*="icon"],
+a[class*="icon"] {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.flip-front-links a:hover,
+.icon-btn:hover,
+button[class*="icon"]:hover,
+a[class*="icon"]:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Tags */
+.flip-tag,
+.skill-tag,
+.tag,
+.badge {
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.flip-tag:hover,
+.skill-tag:hover,
+.tag:hover,
+.badge:hover {
+  background-color: var(--accent-primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
+}
+
+/* Navigation links */
+.navbar a,
+nav a {
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.navbar a:hover,
+nav a:hover {
+  color: var(--accent-primary);
+}
+
+/* Navbar hover effect */
+.navbar:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
