@@ -1,5 +1,5 @@
 services:
-  - type: web
+  - type: static
     name: portfolio
     buildCommand: cd portfolio-main && npm install && npm run build
-    startCommand: npx serve -s portfolio-main/build
+    publishPath: portfolio-main/build
