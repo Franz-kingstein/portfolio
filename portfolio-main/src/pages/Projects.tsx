@@ -12,6 +12,9 @@ import claveImg from '../assets/projects/Classification of Aviation Engine (ClAv
 import ruleImg from '../assets/projects/Resume Understanding Language Engine.jpeg';
 import sortImg from '../assets/projects/SORT.jpeg';
 import paceImg from '../assets/projects/pace.png';
+import bikeImg from '../assets/projects/Bike Position Corrector.jpeg';
+import doveImg from '../assets/projects/Dove.jpeg';
+import fastImg from '../assets/projects/Fast.jpeg';
 
 interface ProjectItem {
   title: string;
@@ -24,10 +27,10 @@ interface ProjectItem {
 
 const Projects: React.FC = () => {
   const projects: ProjectItem[] = [
-    { title: 'Bike Position Corrector', description: 'Smart system to correct and track bicycle position in real-time.', tags: ['IoT', 'Python', 'Sensors'], liveLink: '#', codeLink: '#' },
+    { title: 'Bike Position Corrector', description: 'Smart system to correct and track bicycle position in real-time.', tags: ['IoT', 'Python', 'Sensors'], image: bikeImg, liveLink: '#', codeLink: '#' },
     { title: 'Cotton Disease Classification', description: 'AI model for detecting and classifying cotton crop diseases.', tags: ['TensorFlow', 'Python', 'Deep Learning','Computer Vision'], image: cottonImg, liveLink: '#', codeLink: '#' },
     { title: 'Karunya Interpreter and Computer Kit', description: 'Chromosome analysis system with digital interpretation for genetics.', tags: ['AI', 'Genomics', 'Python','React'], image: karunyaImg, liveLink: '#', codeLink: '#' },
-    { title: 'Deaf Over Voice System', description: 'Assistive technology enabling deaf users to communicate via voice-to-text.', tags: ['NLP', 'Speech Recognition', 'Accessibility','3D modelling'], liveLink: '#', codeLink: '#' },
+    { title: 'Deaf Over Voice System', description: 'Assistive technology enabling deaf users to communicate via voice-to-text.', tags: ['NLP', 'Speech Recognition', 'Accessibility','3D modelling'], image: doveImg, liveLink: '#', codeLink: '#' },
     { title: 'Resume Understanding Language Engine', description: 'NLP-powered engine to parse and understand resumes efficiently.', tags: ['NLP', 'Python', 'FastAPI','OCR'], image: ruleImg, liveLink: '#', codeLink: '#' },
     { title: 'Classification of Aviation Engine (ClAvE)', description: 'AI model for classification and fault detection in aviation engines.', tags: ['Machine Learning', 'Aerospace', 'Python','Signal Processing'], image: claveImg, liveLink: '#', codeLink: '#' },
     { title: 'Disaster Analysis and Description(D.A.D)', description: 'Dashboard to present all previous inident of Disaster happened in India', tags: ['MERN', 'Tailwind', 'Website Development'], image: disasterImg, liveLink: '#', codeLink: '#' },
@@ -37,6 +40,7 @@ const Projects: React.FC = () => {
       title: "FAST – Flood Alert System Tracker",
       description: "Real-time flood monitoring and alert system using sensor data, predictive models, and automated notifications for early disaster response.",
       tags: ["AI", "IoT", "Python", "AWS", "Real-time Monitoring"],
+      image: fastImg,
       liveLink: "#",
       codeLink: "#"
     },
