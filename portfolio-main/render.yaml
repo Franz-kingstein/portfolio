@@ -2,4 +2,4 @@ services:
   - type: web
     name: portfolio
     buildCommand: cd portfolio-main && npm install && npm run build
-    startCommand: npm start
+    startCommand: npx serve -s portfolio-main/build
