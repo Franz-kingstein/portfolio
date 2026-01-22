@@ -1,10 +1,6 @@
 services:
   - type: static
     name: portfolio
-    rootDir: portfolio-main
-    staticPublicPath: /build
     buildCommand: cd portfolio-main && npm install && npm run build
+    staticPublicPath: /build
     publishPath: portfolio-main/build
-    routes:
-      - path: /*
-        destination: /index.html
