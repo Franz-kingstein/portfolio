@@ -3,22 +3,6 @@ import { Mail, Phone, MapPin, Send, ArrowUpRight } from 'lucide-react';
 import { useAdmin } from '../contexts/AdminContext';
 import './Contact.css';
 
-// HloMail contact API config
-const HLOMAIL_URL = 'https://api.hlomail.in/v1/contact-mail';
-// Env-driven proxy (preferred to avoid exposing API key)
-const CONTACT_PROXY_URL =
-  ((import.meta as any)?.env?.VITE_CONTACT_PROXY_URL as string | undefined) ||
-  (process.env.REACT_APP_CONTACT_PROXY_URL as string | undefined);
-// Support both Vite (VITE_*) and CRA (REACT_APP_*) env keys without TS errors
-const HLOMAIL_CONTACT_KEY =
-  ((import.meta as any)?.env?.VITE_HLOMAIL_CONTACT_KEY as string | undefined) ||
-  (process.env.REACT_APP_HLOMAIL_CONTACT_KEY as string | undefined) ||
-  '';
-// Temporary direct-send recipient (fallback to portfolio email at runtime)
-const CONTACT_RECIPIENT_EMAIL =
-  ((import.meta as any)?.env?.VITE_CONTACT_RECIPIENT_EMAIL as string | undefined) ||
-  (process.env.REACT_APP_CONTACT_RECIPIENT_EMAIL as string | undefined);
-
 const Contact: React.FC = () => {
   const { portfolioData } = useAdmin();
   const [formData, setFormData] = useState({
@@ -36,94 +20,20 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Guard: ensure either proxy URL or API key is present
-      if (!CONTACT_PROXY_URL && !HLOMAIL_CONTACT_KEY) {
-        alert('Contact service not configured: set VITE_CONTACT_PROXY_URL (preferred) or VITE_HLOMAIL_CONTACT_KEY.');
-        return;
-      }
+    const recipient = portfolioData.contactEmail || 'franzkingstein@outlook.com';
+    const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
 
-      const finalMessage = formData.subject
-        ? `Subject: ${formData.subject}\n\n${formData.message}`
-        : formData.message;
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
-      // Open a tab up-front to avoid popup blockers if the API returns HTML
-      let receiptWin: Window | null = null;
-      try { receiptWin = window.open('', '_blank'); } catch { /* ignore */ }
-
-      if (CONTACT_PROXY_URL) {
-        const res = await fetch(CONTACT_PROXY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            message: finalMessage,
-            subject: formData.subject,
-            template: '5',
-          }),
-        });
-        const ct = res.headers.get('content-type') || '';
-        if (!res.ok) {
-          const body = await res.text();
-          throw new Error(`Proxy error ${res.status}: ${body}`);
-        }
-        if (ct.includes('text/html')) {
-          const html = await res.text();
-          if (receiptWin) { receiptWin.document.write(html); receiptWin.document.close(); }
-        } else {
-          const data = await res.json().catch(async () => ({ message: await res.text() }));
-          if (!(data.valid || data.success)) throw new Error(data.message || 'Failed');
-          alert(data.message || 'Message sent successfully!');
-          if (receiptWin) receiptWin.close();
-        }
-      } else {
-        // Temporary direct-send: call HloMail with JSON per docs (api_key, recipient_email, subject, body)
-        const recipient = CONTACT_RECIPIENT_EMAIL || portfolioData.contactEmail || 'franzkingstein@outlook.com';
-        const subject = `Portfolio contact: ${formData.subject} — ${formData.name} <${formData.email}>`;
-        const body = formData.message;
-        const res = await fetch(HLOMAIL_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            api_key: HLOMAIL_CONTACT_KEY,
-            recipient_email: recipient,
-            subject,
-            body,
-          }),
-        });
-        const ct = res.headers.get('content-type') || '';
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(`HloMail error ${res.status}: ${text}`);
-        }
-        if (ct.includes('application/json')) {
-          const data = await res.json();
-          if (!(data.valid || data.success)) throw new Error(data.message || 'Failed');
-          alert(data.message || 'Message sent successfully!');
-          if (receiptWin) receiptWin.close();
-        } else if (ct.includes('text/html')) {
-          const html = await res.text();
-          if (receiptWin) { receiptWin.document.write(html); receiptWin.document.close(); }
-        } else {
-          // Fallback: treat as text
-          const text = await res.text();
-          alert(text || 'Message sent successfully!');
-          if (receiptWin) receiptWin.close();
-        }
-      }
-
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (err: any) {
-      console.error('Contact submit error:', err);
-      alert(err?.message || 'Failed to send message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(false);
   };
 
   return (
