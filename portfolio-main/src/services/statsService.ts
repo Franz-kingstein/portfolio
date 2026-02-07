@@ -2,6 +2,17 @@
 const GITHUB_USERNAME = process.env.REACT_APP_GITHUB_USERNAME || 'Franz-kingstein';
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN || '';
 
+// Only include Authorization header if token is set
+const getHeaders = (): Record<string, string> => {
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github.v3+json',
+  };
+  if (GITHUB_TOKEN) {
+    headers.Authorization = `token ${GITHUB_TOKEN}`;
+  }
+  return headers;
+};
+
 interface GitHubUser {
   public_repos: number;
   followers: number;
@@ -38,10 +49,7 @@ export const fetchGitHubStats = async (): Promise<StatsData | null> => {
   try {
     // Fetch user info
     const userResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
+      headers: getHeaders(),
     });
 
     if (!userResponse.ok) {
@@ -55,10 +63,7 @@ export const fetchGitHubStats = async (): Promise<StatsData | null> => {
     const reposResponse = await fetch(
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=stars&direction=desc`,
       {
-        headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
+        headers: getHeaders(),
       }
     );
 

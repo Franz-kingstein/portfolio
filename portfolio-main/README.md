@@ -1,48 +1,159 @@
-# Getting Started with Create React App
+# 🚀 Franz Kingstein — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, interactive portfolio website built with **React + TypeScript**, featuring 3D animations, flip-card projects, custom cursors, and EmailJS-powered contact form.
 
-## Available Scripts
+🌐 **Live:** [franzkingstein.me](https://franzkingstein.me)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🎨 UI & Animations
+- **Spline 3D Integration** — Interactive 3D scene on the homepage via `@splinetool/react-spline`
+- **Framer Motion Animations** — Smooth page transitions and element animations
+- **Flip-Card Projects Grid** — Click-to-flip cards with horizontal scroll on desktop and mobile (with scroll hints)
+- **Custom Robot Cursor** — SVG robot face cursor that changes expression on hover/click
+- **Dark/Light Theme Toggle** — Persistent theme switching with CSS variables
+- **Responsive Design** — Fully optimized for desktop, tablet, and mobile
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 📬 Contact Form
+- **EmailJS Integration** — Sends messages directly from the browser (no backend needed)
+- **Mailto Fallback** — Falls back to `mailto:` link if EmailJS is not configured
+- **Form Validation** — Required field validation with accessible labels
 
-### `npm test`
+### 📊 GitHub Stats
+- **Live GitHub Stats** — Fetches repos, stars, forks, and language breakdown via GitHub API
+- **Secure Token Handling** — Auth header only sent when token is configured (no empty tokens leaked)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### �� Features Section
+- Certifications & achievements with image gallery
+- Hackathon wins and course completions
 
-### `npm run build`
+### 🛠 Skills Section
+- Visual skill breakdown with categorized tech stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🔒 Security
+- **Referrer Policy** — `strict-origin-when-cross-origin` meta tag
+- **Content-Type Sniffing Protection** — `X-Content-Type-Options: nosniff`
+- **Permissions Policy** — Camera, microphone, geolocation disabled
+- **External Links** — All `target="_blank"` links use `rel="noopener noreferrer"`
+- **No Secrets in Code** — All API keys/tokens via environment variables
+- **`.env` in `.gitignore`** — Prevents accidental secret commits
+- **No `dangerouslySetInnerHTML` or `eval()`** — Clean, XSS-safe rendering
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧱 Tech Stack
 
-### `npm run eject`
+| Category       | Technology                                      |
+|----------------|--------------------------------------------------|
+| Framework      | React 19 + TypeScript                            |
+| Build Tool     | Create React App (Webpack)                       |
+| 3D             | Spline (`@splinetool/react-spline`)              |
+| Animations     | Framer Motion                                    |
+| Icons          | Lucide React                                     |
+| Routing        | React Router DOM v7                              |
+| Email          | EmailJS (`@emailjs/browser`)                     |
+| Hosting        | Render (Static Site)                             |
+| Domain         | franzkingstein.me                                |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📁 Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+portfolio-main/
+├── public/
+│   ├── index.html            # Main HTML with security meta tags
+│   ├── letter-f.png          # Custom favicon (F icon)
+│   ├── cursor-default.svg    # Robot cursor (default)
+│   ├── cursor-pointer.svg    # Robot cursor (hover/pointer)
+│   ├── manifest.json         # PWA manifest
+│   ├── robots.txt            # Search engine crawling rules
+│   └── 404.html              # SPA fallback for client-side routing
+├── src/
+│   ├── assets/               # Images, certificates, project screenshots
+│   ├── components/           # Navbar, ThemeToggle, AdminPanel, ProjectCard
+│   ├── contexts/             # ThemeContext, AdminContext
+│   ├── pages/                # Home, About, Projects, Features, Skills, Contact
+│   ├── services/             # statsService (GitHub/LeetCode API)
+│   ├── App.tsx               # Root component
+│   └── index.tsx             # Entry point
+├── render.yaml               # Render deployment config
+├── package.json
+└── tsconfig.json
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## ⚙️ Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Set these in your **Render dashboard** → Service → **Environment**:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# portfolio
-# Deployment Ready
+| Variable                           | Required | Description                        |
+|------------------------------------|----------|------------------------------------|
+| `REACT_APP_GITHUB_TOKEN`          | Optional | GitHub PAT for stats (read:user)   |
+| `REACT_APP_GITHUB_USERNAME`       | Optional | GitHub username (default: Franz-kingstein) |
+| `REACT_APP_EMAILJS_SERVICE_ID`    | Yes*     | EmailJS service ID                 |
+| `REACT_APP_EMAILJS_TEMPLATE_ID`   | Yes*     | EmailJS template ID                |
+| `REACT_APP_EMAILJS_PUBLIC_KEY`    | Yes*     | EmailJS public key                 |
+
+> *Required for the contact form to send emails. Without these, it falls back to `mailto:`.
+
+---
+
+## 🚀 Deployment (Render — Static Site)
+
+1. Connect your GitHub repo to [Render](https://render.com)
+2. Create a **Static Site** service
+3. Set:
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `build`
+4. Add environment variables (see above)
+5. Deploy!
+
+The `render.yaml` in the repo also supports Blueprint deploys.
+
+---
+
+## 🖱️ Custom Cursor
+
+The portfolio uses SVG robot cursors:
+- **Default** — Purple robot face with grid mouth
+- **Pointer** — Robot with glowing antenna and smile (on links/buttons)
+
+Cursors are 48×48px SVGs in `src/assets/`, bundled by Webpack.
+
+---
+
+## 📝 Icon Attribution
+
+- Favicon: [Letter f icons created by Md Tanvirul Haque — Flaticon](https://www.flaticon.com/free-icons/letter-f)
+
+---
+
+## 🧪 Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm start
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+```
+
+---
+
+## 📄 License
+
+This project is private. All rights reserved.
+
+---
+
+Built with ❤️ by [Franz Kingstein](https://franzkingstein.me)
