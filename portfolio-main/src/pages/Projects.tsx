@@ -76,6 +76,7 @@ const Projects: React.FC = () => {
     <section id="projects" className="projects">
       <div className="container">
         <h2 className="section-title">My Projects</h2>
+        <p className="scroll-hint">Swipe to explore more →</p>
         <div className="projects-grid">
           {projects.map((p, i) => (
             <div

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <!-- Robot head - pointer state (brighter, smiling) -->
+  <rect x="8" y="12" width="32" height="28" rx="6" fill="#8b5cf6" stroke="#c4b5fd" stroke-width="2"/>
+  <!-- Antenna glowing -->
+  <line x1="24" y1="3" x2="24" y2="12" stroke="#c4b5fd" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="24" cy="3" r="3.5" fill="#fbbf24"/>
+  <!-- Eyes wide open -->
+  <circle cx="17" cy="22" r="4.5" fill="#fff"/>
+  <circle cx="31" cy="22" r="4.5" fill="#fff"/>
+  <circle cx="17" cy="21" r="2" fill="#1e1b4b"/>
+  <circle cx="31" cy="21" r="2" fill="#1e1b4b"/>
+  <!-- Smile -->
+  <path d="M15 32 Q24 38 33 32" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

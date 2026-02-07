@@ -1,3 +1,16 @@
+/* ============================= */
+/* Custom Robot Cursor            */
+/* ============================= */
+*, *::before, *::after {
+  cursor: url('./assets/cursor-default.svg') 24 24, auto;
+}
+
+a, button, [role="button"], input[type="submit"],
+select, .flip-card, .nav-link, .social-link,
+[onclick], label[for] {
+  cursor: url('./assets/cursor-pointer.svg') 24 24, pointer !important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
