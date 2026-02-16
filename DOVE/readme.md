@@ -1,3 +1,61 @@
+# Gloss-to-Sign Language Pose Generation Project
+
+## Quickstart: Lab Setup & Training with Docker
+
+### 1. Build the Docker Image
+
+```bash
+cd Data_Analysis_and_Data_mining/DOVE
+docker build -t gloss2pose .
+```
+
+### 2. Run the Docker Container (with GPU)
+
+Replace `/path/to/your/project` with your actual project directory path:
+
+```bash
+docker run --gpus all -it -v /path/to/your/project:/workspace gloss2pose
+```
+
+### 3. Set Up Hugging Face Token (Inside Container)
+
+```bash
+export HUGGINGFACE_HUB_TOKEN=your_token_here
+```
+
+### 4. Model Selection (Single Batch Test)
+
+```bash
+python Data_Analysis_and_Data_mining/DOVE/model_selection.py
+```
+
+### 5. Full Model Training
+
+Choose model: `gru`, `lstm`, `transformer`, `bert`, or `linear`.
+
+```bash
+python Data_Analysis_and_Data_mining/DOVE/train_full_model.py --model gru
+```
+
+### 6. Model Checkpoints
+
+Best model weights are saved as `best_<model>_model.pt` in the working directory.
+
+---
+
+## Requirements (Handled by Docker)
+- Ubuntu 24.04, CUDA 12.1, Python 3.10
+- PyTorch, transformers, datasets, pose-format, numpy, pandas, matplotlib, bitsandbytes, mediapipe
+- git, git-lfs, ffmpeg
+
+---
+
+## Notes
+- Always use the official iSign dataset splits for training/validation.
+- Adjust batch size and epochs in the scripts if needed for your GPU.
+- For evaluation or inference, adapt the scripts as required.
+
+---
 Here is a **single consolidated README** for your entire project (model selection + final training).
 You can copy this directly into `README.md`.
 
