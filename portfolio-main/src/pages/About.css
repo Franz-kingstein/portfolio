@@ -1,183 +1,400 @@
 .about {
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
+  padding: 120px 80px;
 }
 
-/* Make About section full-bleed width */
-.about .container {
-  max-width: 100%;
-  width: 100%;
-  padding-left: clamp(1rem, 5vw, 4rem);
-  padding-right: clamp(1rem, 5vw, 4rem);
-}
-
-/* Glassy card wrapper */
-.about-card {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: color-mix(
-    in oklab,
-    var(--bg-primary) 55%,
-    transparent
-  ); /* lighter, more translucent for light mode glass */
-  border: 1px solid var(--border-color);
-  border-color: color-mix(in oklab, var(--border-color) 70%, transparent);
-  border-radius: 24px;
-  padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem); /* restore roomier padding */
-  box-shadow: 0 20px 60px var(--shadow);
-  max-width: 2400px; /* slightly narrower width */
-  margin: 0 auto; /* center within full-bleed container */
-  box-sizing: content-box; /* default sizing */
-  height: fixed; /* remove fixed height */
-  margin-top: 3rem; /* restore */
-  /*margin-bottom: 4rem;  restore */
-  overflow: visible; /* allow natural overflow inside card */
-}
-
-/* Tighter internal spacing to avoid overflow inside fixed-height card */
+/* Remove card wrapper, content fills it */
 .about-content {
-  display: grid;
-  grid-template-columns: 1.1fr 1.3fr;
-  gap: clamp(2rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-top: 1rem; /* restore */
-  min-height: 60vh; /* restore space for layout balance */
-  height: auto; /* remove forced 100% height */
-}
-
-/* Enhance glass effect specifically for light mode */
-:root:not([data-theme="dark"]) .about-card {
-  background: color-mix(in oklab, var(--bg-primary) 45%, transparent);
-  border-color: color-mix(in oklab, var(--border-color) 60%, transparent);
+  justify-content: center;
+  gap: 120px;
+  max-width: 1700px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
 /* Right-side text block spacing and flow */
 .about-text {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 2vh, 1.75rem);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Larger image but slightly narrower width */
-.image-placeholder {
+/* Photo */
+.about-image {
+  flex: 0 0 600px; /* Increase image width */
+}
+
+.about-image-wrapper {
   position: relative;
-  width: min(700px, 40vw); /* was min(520px, 46vw) */
-  padding: clamp(6px, 1vw, 10px);
-  border-radius: 28px;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
-  box-shadow: 0 20px 40px var(--shadow);
-  max-height: none; /* remove cap */
-  overflow: visible; /* allow natural image sizing */
+  width: 600px; /* Increase image width */
+  height: 700px; /* Increase image height */
+  border-radius: 20px;
+  border: 1.5px solid rgba(127, 119, 221, 0.4);
+  box-shadow: 0 0 30px rgba(127, 119, 221, 0.2), 0 0 60px rgba(127, 119, 221, 0.05);
 }
 
-.about-photo {
-  display: block;
+.img-wrapped {
   width: 100%;
-  height: auto; /* back to intrinsic height */
-  border-radius: 22px;
+  height: 100%;
   object-fit: cover;
+  object-position: center top;
+  border-radius: 20px;
+  filter: contrast(1.05) brightness(1.02);
 }
 
-/* Larger text */
-.cursive-heading {
-  font-family: var(--font-cursive);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
+/* Photo Brackets */
+.photo-bracket-tl {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border-top: 3px solid #7F77DD;
+  border-right: 3px solid #7F77DD;
+  z-index: 2;
 }
+
+.photo-bracket-br {
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+  width: 40px;
+  height: 40px;
+  border-bottom: 3px solid #1D9E75;
+  border-left: 3px solid #1D9E75;
+  z-index: 2;
+}
+
+.section-tag {
+  font-family: monospace;
+  font-size: 14px;
+  color: #1D9E75;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.heading-accent-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #7F77DD, #1D9E75);
+  border-radius: 2px;
+  margin: 16px 0 32px 0;
+}
+
+.about-heading {
+  font-family: var(--font-primary);
+  font-size: 72px; /* Increase heading font size */
+  font-weight: 700;
+  margin-bottom: 0;
+  color: #E8E8F0;
+  line-height: 1.1;
+}
+
 .about-description {
-  font-size: clamp(
-    1.35rem,
-    2.4vw,
-    1.7rem
-  ); /* was clamp(1.2rem, 2.2vw, 1.5rem) */
-  line-height: 2; /* improve readability with larger text */
+  font-size: 22px; /* Increase description font size */
+  line-height: 1.8;
+  margin-bottom: 32px;
+  color: #9999B0;
+  width: 100%;
 }
+p.about-description:last-of-type {
+  margin-bottom: 0;
+}
+
 .highlight {
   color: var(--accent-primary);
-  font-weight: 800;
-}
-
-/* Stats */
-/* Gradient blue stats container */
-.about-stats {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  flex-wrap: wrap; /* responsive */
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
-  border-radius: 20px;
-  padding: clamp(1rem, 2.5vw, 1.5rem);
-  box-shadow: 0 10px 30px var(--shadow-hover);
-  gap: 0; /* items sit inside same box */
-  margin-top: clamp(2rem, 6vh, 3.5rem); /* restore original spacing */
-}
-
-/* Override stat card styles within gradient box */
-.about-stats .stat {
-  flex: 1 1 220px;
-  text-align: center;
-  padding: clamp(0.75rem, 2vw, 1.25rem);
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-.about-stats .stat:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.about-stats .stat h3 {
-  color: #fff;
-  font-size: clamp(
-    2.75rem,
-    5.2vw,
-    4.5rem
-  ); /* was clamp(2.25rem, 4.5vw, 3rem) */
-}
-
-.about-stats .stat p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 600;
 }
 
-/* Responsive: stack items and use bottom dividers */
-@media (max-width: 768px) {
-  .about-stats {
-    flex-direction: column;
-  }
-  .about-stats .stat:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
+.about-stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+  width: 100%;
 }
 
+.stat-card {
+  background: linear-gradient(135deg, #111118 0%, #16161f 100%);
+  border: 1px solid rgba(127, 119, 221, 0.25);
+  border-radius: 16px;
+  padding: 28px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: default;
+  min-width: 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle top highlight line */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127,119,221,0.4), transparent);
+  border-radius: 1px;
+}
+
+.stat-card:hover {
+  border-color: rgba(127, 119, 221, 0.5);
+  box-shadow: 0 0 24px rgba(127, 119, 221, 0.15);
+  transform: translateY(-3px);
+}
+
+.stat-number {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #7F77DD 0%, #1D9E75 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #9999B0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  display: block;
+  margin: 0;
+  white-space: normal;
+  text-align: center;
+}
+
+/* ── Tablet (≤ 1024px) ─────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .about-card {
-    max-width: 100%;
-    height: auto; /* let content size naturally on smaller screens */
-    padding: clamp(1rem, 4vw, 2rem);
+  .about {
+    padding: 80px 32px;
+    overflow-x: hidden;
   }
+
   .about-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    min-height: auto;
+    gap: 48px;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
-  .image-placeholder {
-    width: min(420px, 80vw);
+
+  .about-image {
+    flex: 0 0 auto;
+    width: min(320px, 80vw);
   }
-  .about-stats {
-    margin-top: clamp(1rem, 3vh, 2rem);
+
+  .about-image-wrapper {
+    width: min(320px, 80vw);
+    height: min(380px, 90vw);
+  }
+
+  .about-text {
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .about-heading {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .heading-accent-line {
+    margin: 4px auto 24px auto;
+  }
+
+  .about-description {
+    text-align: justify;
+    text-align-last: left;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    line-height: 1.85;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  /* Stats: 3-col grid, slightly tighter */
+  .about-stats-container {
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .stat-card {
+    padding: 22px 10px;
+  }
+  .stat-number {
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  }
+  .stat-label {
+    font-size: clamp(0.55rem, 1.1vw, 0.7rem);
   }
 }
 
-@media (max-width: 640px) {
-  .image-placeholder {
-    width: min(320px, 88vw);
+/* ── Mobile (≤ 768px) ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about {
+    padding: 60px 0;
+    background: #0A0A0F;
+    overflow-x: hidden;
+  }
+
+  /* Minimize side padding inside the about section container */
+  .about .container {
+    padding: 0 16px; /* Added comfortable horizontal spacing from screen edges */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-content {
+    gap: 36px;
+    padding: 0;
+  }
+
+  .about-image {
+    width: min(260px, 75vw);
+  }
+
+  .about-image-wrapper {
+    width: min(260px, 75vw);
+    height: min(310px, 88vw);
+  }
+
+  .about-heading {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+    margin-top: 18px;
+    margin-bottom: 0;
+  }
+
+  .heading-accent-line {
+    margin: 3px auto 28px auto; /* Increased vertical space under header line */
+  }
+
+  .about-description {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    text-align: justify;
+    text-align-last: left;
+    letter-spacing: normal;
+    margin-bottom: 16px;
+  }
+
+  /* Stats: 3-col grid, fluid font scaling with wider third card */
+  .about-stats-container {
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 8px;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .stat-card {
+    padding: 20px 4px; /* Reduced horizontal padding to give text more room */
+    border-radius: 12px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .stat-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+  .stat-number {
+    font-size: clamp(1.4rem, 4.8vw, 1.8rem); /* Scaled down slightly to fit cards */
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: clamp(0.5rem, 1.7vw, 0.58rem); /* Scaled down slightly to prevent clipping */
+    line-height: 1.25;
+    white-space: normal;
+    text-align: center;
+    letter-spacing: 0.01em;
   }
 }
+
+/* ── Small Mobile (≤ 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+  .about {
+    padding: 48px 0;
+  }
+
+  .about .container {
+    padding: 0 12px; /* Added comfortable horizontal spacing from screen edges */
+  }
+
+  .about-content {
+    gap: 24px;
+  }
+
+  .about-image {
+    width: min(220px, 72vw);
+  }
+
+  .about-image-wrapper {
+    width: min(220px, 72vw);
+    height: min(270px, 85vw);
+  }
+
+  .about-heading {
+    font-size: clamp(1.6rem, 10vw, 2.2rem);
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+
+  .heading-accent-line {
+    margin: 3px auto 24px auto; /* Increased vertical space under header line */
+  }
+
+  .about-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    text-align: justify;
+    text-align-last: left;
+    margin-bottom: 12px;
+  }
+
+  /* Stats: 3-col, even smaller fluid scaling with wider third card */
+  .about-stats-container {
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 6px;
+    margin-top: 20px;
+  }
+  .stat-card {
+    padding: 16px 2px; /* Minimal horizontal padding to maximize text space */
+    border-radius: 10px;
+  }
+  .stat-number {
+    font-size: clamp(1.2rem, 5vw, 1.45rem); /* Scaled down slightly to fit cards */
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: clamp(0.48rem, 2.2vw, 0.54rem); /* Scaled down slightly to prevent clipping */
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+  }
+}
+

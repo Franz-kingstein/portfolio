@@ -1,0 +1,261 @@
+/* ============================= */
+/* Card Structure & Flip         */
+/* ============================= */
+.project-card-outer {
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-card-outer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px var(--shadow-faded);
+}
+
+.project-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.project-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.project-card-front,
+.project-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Safari */
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+/* ============================= */
+/* Card Front                    */
+/* ============================= */
+.project-card-front {
+  border: 1px solid var(--border-color);
+}
+
+.project-card-outer:hover .project-card-front {
+  border-color: var(--accent-primary-faded);
+}
+
+.card-img-container {
+  width: 100%;
+  height: 65%;
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, var(--bg-secondary-trans) 100%);
+}
+
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent-primary-faded), var(--accent-secondary-faded));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img-placeholder-text {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.card-front-content {
+  padding: 12px 16px;
+  position: relative;
+  z-index: 1;
+  height: 35%;
+  box-sizing: border-box;
+}
+
+.card-featured-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--accent-primary-faded);
+  border: 1px solid var(--accent-primary-border);
+  color: var(--accent-primary);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.card-front-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-front-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.card-front-tag {
+  font-size: 10px;
+  background: var(--accent-primary-faded-more);
+  color: var(--accent-primary-text);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--accent-primary-border);
+}
+
+.card-front-hint {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ============================= */
+/* Card Back                     */
+/* ============================= */
+.project-card-back {
+  transform: rotateY(180deg);
+  border: 1px solid var(--accent-primary-border);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.card-back-top, .card-back-middle, .card-back-bottom {
+  width: 100%;
+}
+
+.card-back-code-label {
+  font-size: 11px;
+  color: var(--accent-secondary);
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  margin: 0 0 8px 0;
+}
+
+.card-back-divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  margin-bottom: 12px;
+}
+
+.card-back-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 10px 0;
+}
+
+.card-back-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin: 0;
+}
+
+.card-back-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.card-back-tag {
+  font-size: 11px;
+  background: var(--accent-secondary-faded);
+  color: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary-border);
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.card-back-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.card-back-button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.github-button {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.github-button:hover:not(.disabled) {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.live-button {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.live-button:hover {
+  filter: brightness(1.1);
+}
+
+.disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.card-back-hint {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .project-card-outer {
+    height: 280px;
+  }
+}

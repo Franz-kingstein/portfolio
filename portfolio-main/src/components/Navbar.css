@@ -1,185 +1,234 @@
+/* ----------------------------------------------------------------- */
+/* 1. NAVBAR MAIN CONTAINER
+/* ----------------------------------------------------------------- */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-color);
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  min-width: 600px;
   z-index: 1000;
-  transition: var(--transition);
-}
-
-[data-theme="dark"] .navbar {
-  background: rgba(26, 26, 26, 0.95);
-}
-
-.navbar.scrolled {
-  padding: 0.5rem 0;
-  box-shadow: 0 2px 20px var(--shadow);
-}
-
-.nav-container {
-  max-width: 100%;
-  margin: 0;
-  padding: 0 4rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  
+  /* Entrance Animation: Dropping in from the top */
+  animation: navDropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes navDropIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ----------------------------------------------------------------- */
+/* 2. PILL / CAPSULE LAYOUT
+/* ----------------------------------------------------------------- */
+.navbar-pill {
   width: 100%;
-}
-
-.nav-logo {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 800;
-  text-decoration: none;
-  font-family: var(--font-cursive);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.nav-menu {
   display: flex;
-  list-style: none;
-  gap: 1rem;
+  flex-direction: row;
   align-items: center;
-  margin-left: auto;
-  margin-right: 2rem;
+  justify-content: space-between;
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(127, 119, 221, 0.2);
+  border-radius: 999px;
+  padding: 12px 32px;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(127, 119, 221, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scroll behavior: increased opacity when scrolled > 50px */
+.navbar.scrolled .navbar-pill {
+  background: rgba(10, 10, 15, 0.85);
+  border-color: rgba(127, 119, 221, 0.35);
+}
+
+/* ----------------------------------------------------------------- */
+/* 3. monogram "FK" styling
+/* ----------------------------------------------------------------- */
+.nav-monogram {
+  color: #7F77DD;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-right: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease;
+}
+
+.nav-monogram:hover {
+  opacity: 0.8;
+}
+
+/* ----------------------------------------------------------------- */
+/* 4. NAV LINKS
+/* ----------------------------------------------------------------- */
+.nav-links-desktop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-link {
-  color: var(--text-primary);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-weight: 600;
+  padding: 6px 12px;
+  font-weight: 500;
   position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
-  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-  color: #fff;
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
+  color: #FFFFFF;
 }
 
-/* Remove the previous ::before pseudo-element if it exists or override it */
-.nav-link::before {
-  display: none;
-}
-
-/* active selection shows full blue background */
-.nav-link.active::before {
-  transform: scaleX(1);
-}
 .nav-link.active {
-  color: #fff;
+  color: #7F77DD;
+  font-weight: 600;
 }
 
-/* remove underline when active since we have a filled bg */
+/* Underline dot indicator below links on hover/active */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #7F77DD;
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover::after,
 .nav-link.active::after {
-  display: none;
+  transform: translateX(-50%) scale(1);
 }
 
-/* keyboard accessibility */
-.nav-link:focus-visible::before {
-  transform: scaleX(1);
+
+/* ----------------------------------------------------------------- */
+/* 5. THEME TOGGLE
+/* ----------------------------------------------------------------- */
+.nav-theme-toggle-pill {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(127, 119, 221, 0.1);
+  border: 1px solid rgba(127, 119, 221, 0.2);
+  border-radius: 50%;
+  color: #7F77DD;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0;
 }
 
-.nav-toggle {
+.nav-theme-toggle-pill:hover {
+  background: rgba(127, 119, 221, 0.2);
+}
+
+/* 6. MOBILE BUTTON / MENU TOGGLE
+/* ----------------------------------------------------------------- */
+.nav-toggle-mobile {
   display: none;
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: var(--transition);
+  padding: 4px;
 }
 
-.nav-toggle:hover {
-  background: var(--bg-secondary);
+/* ----------------------------------------------------------------- */
+/* 7. MOBILE DROPDOWN MENU
+/* ----------------------------------------------------------------- */
+.nav-dropdown-mobile {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(127, 119, 221, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: dropdownSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.nav-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: 0.5rem; /* add breathing room from right-justified links */
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .nav-container {
-    justify-content: space-between;
-  } /* keep default on mobile */
-  .nav-menu {
-    flex: 0 0 auto;
-    margin-left: 0;
-    justify-content: center;
-  }
-
-  .nav-container {
-    padding: 0 1rem;
-  }
-
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
-    flex-direction: column;
-    padding: 2rem 0;
-    gap: 1rem;
-    transform: translateY(-100%);
+@keyframes dropdownSlideDown {
+  from {
     opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
+    transform: translateY(-10px);
   }
-
-  .nav-menu.active {
-    transform: translateY(0);
+  to {
     opacity: 1;
-    visibility: visible;
-  }
-
-  .nav-link {
-    padding: 1rem 2rem;
-    width: 100%;
-    text-align: center;
-    border-radius: 0;
-  }
-
-  .nav-link:hover {
-    background: var(--bg-secondary);
-  }
-
-  .nav-actions {
-    gap: 0.25rem;
+    transform: translateY(0);
   }
 }
 
-@media (max-width: 480px) {
-  .nav-container {
-    padding: 0 0.5rem;
+.nav-dropdown-link {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-dropdown-link:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-dropdown-link.active {
+  color: #7F77DD;
+  background: rgba(127, 119, 221, 0.08);
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------------- */
+/* 8. RESPONSIVE MEDIA QUERIES (MOBILE)
+/* ----------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .navbar {
+    min-width: unset;
+    width: calc(100% - 32px); /* 16px margin on each side */
   }
 
-  .nav-logo {
-    font-size: 1.5rem;
+  .navbar-pill {
+    padding: 10px 20px;
+  }
+
+  .nav-links-desktop,
+  .nav-theme-toggle-pill {
+    display: none;
+  }
+
+  .nav-toggle-mobile {
+    display: flex;
   }
 }

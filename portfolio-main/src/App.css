@@ -6,16 +6,16 @@
 }
 
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
-  --accent-primary: #007bff;
-  --accent-secondary: #6c63ff;
-  --border-color: #dee2e6;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --shadow-hover: rgba(0, 0, 0, 0.15);
+  /* Dark Futuristic theme colors */
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #111118;
+  --text-primary: #E8E8F0;
+  --text-secondary: #9999B0;
+  --accent-primary: #7F77DD;
+  --accent-secondary: #1D9E75;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.5);
   
   /* Font families */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -28,21 +28,23 @@
 
 [data-theme="dark"] {
   /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #252525;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --accent-primary: #4dabf7;
-  --accent-secondary: #8b5cf6;
-  --border-color: #404040;
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #111118;
+  --text-primary: #E8E8F0;
+  --text-secondary: #9999B0;
+  --accent-primary: #7F77DD;
+  --accent-secondary: #1D9E75;
+  --border-color: rgba(255, 255, 255, 0.08);
   --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.4);
+  --shadow-hover: rgba(0, 0, 0, 0.5);
 }
 
 /* Base styles */
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -52,6 +54,7 @@ body {
   background-color: var(--bg-primary);
   transition: var(--transition);
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* Typography */
@@ -72,9 +75,11 @@ p {
 
 /* Container */
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 4rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Section styles */
@@ -298,22 +303,30 @@ section .container > *,
   }
 }
 
+/* Mobile layout classes */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
+  background-color: var(--bg-primary); /* Fix for the vertical bar */
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--bg-primary); /* Used to be bg-secondary, modifying to primary so it blends in */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
+  background: var(--border-color); /* Used to be accent-primary (purple), changing to subtle border color */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
+  background: var(--text-secondary); /* Used to be accent-secondary, making it grey */
 }
 
 /* Loading states */
@@ -366,7 +379,13 @@ textarea:focus {
 }
 
 .about {
-  padding: clamp(6rem, 10vh, 8rem) 0;
+  /* Changed padding and background to full bleed `#0A0A0F` */
+  background: var(--bg-primary);
+  padding: 120px 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   scroll-margin-top: 80px;
 }
 
@@ -382,7 +401,6 @@ a:hover {
 }
 
 /* Cards and Interactive Elements */
-.flip-card,
 .cert-item,
 .feature-card,
 .tile,
@@ -390,7 +408,6 @@ a:hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.flip-card:hover,
 .cert-item:hover,
 .feature-card:hover,
 .tile:hover,

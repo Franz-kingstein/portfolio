@@ -45,7 +45,7 @@ interface StatsData {
 }
 
 // Fetch user data from GitHub API
-export const fetchGitHubStats = async (): Promise<StatsData | null> => {
+export const fetchGitHubStats = async (): Promise<any | null> => {
   try {
     // Fetch user info
     const userResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
@@ -93,18 +93,36 @@ export const fetchGitHubStats = async (): Promise<StatsData | null> => {
     const contributions = generateContributionData();
 
     return {
-      totalRepos: userData.public_repos,
+      repos: userData.public_repos,
       followers: userData.followers,
       following: userData.following,
-      totalStars,
-      totalForks,
+      stars: totalStars,
+      forks: totalForks,
       languages,
       contributions,
       topRepositories,
     };
   } catch (error) {
-    console.error('Error fetching GitHub stats:', error);
-    return null;
+    console.error('Error fetching GitHub stats, using hardcoded data:', error);
+    // Return a hardcoded fallback object on error
+    return {
+      repos: 117,
+      followers: 7,
+      following: 13,
+      stars: 3,
+      forks: 2,
+      languages: {
+        "Python": 35,
+        "Jupyter Notebook": 20,
+        "TypeScript": 15,
+        "JavaScript": 10,
+        "HTML": 5,
+        "Dart": 10,
+        "Solidity": 5,
+      },
+      contributions: generateContributionData(),
+      topRepositories: [], // Can be left empty or filled with mock data
+    };
   }
 };
 
@@ -140,26 +158,48 @@ const generateContributionData = (): ContributionData[] => {
 // Fetch LeetCode stats (if available via public API)
 export const fetchLeetCodeStats = async (
   username: string
-): Promise<{ solved: number; easy: number; medium: number; hard: number } | null> => {
+): Promise<any | null> => {
   try {
     const response = await fetch(
       `https://leetcode-stats-api.herokuapp.com/${username}`
     );
 
-    if (!response.ok) {
-      return null;
+    if (!response.ok || response.status !== 200) {
+      throw new Error('API request failed');
     }
 
     const data = await response.json();
+    
+    if (data.status === "error") {
+        throw new Error('API returned error');
+    }
+
     return {
-      solved: data.totalSolved,
-      easy: data.easySolved,
-      medium: data.mediumSolved,
-      hard: data.hardSolved,
+        totalSolved: data.totalSolved,
+        easySolved: data.easySolved,
+        totalEasy: data.totalEasy,
+        mediumSolved: data.mediumSolved,
+        totalMedium: data.totalMedium,
+        hardSolved: data.hardSolved,
+        totalHard: data.totalHard,
+        ranking: data.ranking,
+        acceptanceRate: data.acceptanceRate,
+        username: username
     };
   } catch (error) {
-    console.error('Error fetching LeetCode stats:', error);
-    return null;
+    console.error('Error fetching LeetCode stats, using hardcoded data:', error);
+    return {
+        totalSolved: 93,
+        easySolved: 69,
+        totalEasy: 947,
+        mediumSolved: 22,
+        totalMedium: 2063,
+        hardSolved: 2,
+        totalHard: 938,
+        ranking: 1623243,
+        acceptanceRate: 45.2,
+        username: "Franz_2005"
+    };
   }
 };
 

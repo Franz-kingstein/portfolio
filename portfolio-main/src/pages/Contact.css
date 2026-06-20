@@ -22,7 +22,7 @@
   font-weight: 800;
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: linear-gradient(90deg, #7F77DD, #1D9E75);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -107,6 +107,26 @@
   color: var(--accent-primary);
 }
 
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #1D9E75;
+  border-radius: 50%;
+  display: inline-block;
+  animation: animate-pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes animate-pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+}
+
 .info-label {
   font-size: 0.9rem;
   font-weight: 500;
@@ -149,12 +169,12 @@
 }
 
 .social-section h3 {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #7F77DD;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.15em;
 }
 
 .social-grid {
@@ -191,6 +211,7 @@
   border-radius: 20px;
   padding: 3rem;
   border: 1px solid var(--border-color);
+  border-top: 2px solid #7F77DD;
   /* Add form animation */
   animation: fadeInRight 0.8s ease-out 0.6s both;
   opacity: 0;
@@ -226,12 +247,12 @@
 .form-field textarea {
   padding: 1rem 1.25rem;
   background: var(--bg-primary);
-  border: 2px solid var(--border-color);
+  border: 1px solid rgba(127, 119, 221, 0.2);
   border-radius: 12px;
   color: var(--text-primary);
   font-size: 1rem;
   font-family: inherit;
-  transition: var(--transition);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   resize: vertical;
   /* Add subtle hover animation */
   transform: translateY(0);
@@ -240,14 +261,14 @@
 .form-field input:hover,
 .form-field textarea:hover {
   transform: translateY(-2px);
-  border-color: var(--accent-primary);
+  border-color: rgba(127, 119, 221, 0.4);
 }
 
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(127, 119, 221, 0.6);
+  box-shadow: 0 0 0 3px rgba(127, 119, 221, 0.1);
 }
 
 .form-field input::placeholder,
@@ -262,14 +283,14 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 1.25rem 2rem;
-  background: var(--text-primary);
-  color: var(--bg-primary);
+  background: #7F77DD;
+  color: #FFFFFF;
   border: none;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 1rem;
   /* Add subtle pulse animation */
   animation: pulse 2s infinite;
@@ -281,8 +302,8 @@
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 35px var(--shadow-hover);
-  background: var(--accent-primary);
+  background: #1D9E75;
+  box-shadow: 0 0 20px rgba(127, 119, 221, 0.4);
 }
 
 .submit-btn:disabled {
@@ -291,17 +312,18 @@
 }
 
 .submit-btn.submitting {
-  background: var(--accent-primary);
+  background: #1D9E75;
 }
 
 /* Dark theme adjustments */
 [data-theme="dark"] .submit-btn {
-  background: white;
-  color: var(--bg-primary);
+  background: #7F77DD;
+  color: #FFFFFF;
 }
 
 [data-theme="dark"] .submit-btn:hover:not(:disabled) {
-  background: #f0f0f0;
+  background: #1D9E75;
+  box-shadow: 0 0 20px rgba(127, 119, 221, 0.4);
 }
 
 /* Mobile Responsive Design */

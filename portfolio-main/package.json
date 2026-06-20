@@ -5,6 +5,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.95",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -13,6 +14,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
+    "ajv": "^8.20.0",
     "framer-motion": "^12.23.12",
     "http-proxy-middleware": "^3.0.5",
     "lucide-react": "^0.541.0",

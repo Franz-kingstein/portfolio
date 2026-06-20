@@ -1,33 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
-import ThemeToggle from './ThemeToggle';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const [activeLink, setActiveLink] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scrollspy to detect active section
   useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+    const sections = ['home', 'about', 'projects', 'features', 'skills', 'contact'];
+    let observer: IntersectionObserver;
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    };
+
+    // Use a small delay to guarantee all DOM elements are mounted in React
+    const timer = setTimeout(() => {
+      observer = new IntersectionObserver(handleIntersection, {
+        root: null,
+        threshold: 0,
+        rootMargin: '-30% 0px -30% 0px',
+      });
+
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
+  }, []);
 
   const navItems = [
     { path: 'home', label: 'Home' },
     { path: 'about', label: 'About' },
     { path: 'projects', label: 'Projects' },
-    { path: 'features', label: 'Features' },
+    { path: 'features', label: 'Stats' },
     { path: 'skills', label: 'Skills' },
     { path: 'contact', label: 'Contact' }
   ];
@@ -42,20 +68,31 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="nav-container">
-        <a href="#home" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
-          <span className="gradient-text">Franz Kingstein</span>
+      <div className="navbar-pill">
+        {/* Left Side: Monogram */}
+        <a 
+          href="#home" 
+          className="nav-monogram" 
+          onClick={(e) => { 
+            e.preventDefault(); 
+            scrollToSection('home'); 
+            setActiveLink('home');
+          }}
+        >
+          FK
         </a>
-        
-        <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
+
+        {/* Center: Desktop Links */}
+        <div className="nav-links-desktop">
           {navItems.map((item) => (
             <a
               key={item.path}
               href={`#${item.path}`}
-              className="nav-link"
+              className={`nav-link ${activeLink === item.path ? 'active' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection(item.path);
+                setActiveLink(item.path);
               }}
             >
               {item.label}
@@ -63,18 +100,37 @@ const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* Theme toggle inline in navbar */}
-        <div className="nav-actions">
-          <ThemeToggle variant="inline" />
-          <button
-            className="nav-toggle"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle navigation"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+
+
+        {/* Mobile Toggle (Hamburger) */}
+        <button
+          className="nav-toggle-mobile"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="nav-dropdown-mobile">
+          {navItems.map((item) => (
+            <a
+              key={item.path}
+              href={`#${item.path}`}
+              className={`nav-dropdown-link ${activeLink === item.path ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.path);
+                setActiveLink(item.path);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,13 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, ArrowUpRight } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { useAdmin } from '../contexts/AdminContext';
 import './Contact.css';
 
-// EmailJS config — set these in your Render environment variables
-const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
-const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
-const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '';
+// Web3Forms access key — can be set in Render environment variables
+const WEB3FORMS_ACCESS_KEY = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || '02609e7d-076c-45ad-bc57-907f4d74758f';
 
 const Contact: React.FC = () => {
   const { portfolioData } = useAdmin();
@@ -31,24 +28,31 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // If EmailJS is configured, use it
-    if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
-      try {
-        await emailjs.sendForm(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          formRef.current!,
-          EMAILJS_PUBLIC_KEY
-        );
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+      if (data.success) {
         alert('Message sent successfully! 🎉');
         setFormData({ name: '', email: '', subject: '', message: '' });
-      } catch (err: any) {
-        console.error('EmailJS error:', err);
-        alert('Failed to send message. Please try again.');
-      } finally {
-        setIsSubmitting(false);
+      } else {
+        throw new Error(data.message || 'Web3Forms API error');
       }
-    } else {
+    } catch (err: any) {
+      console.error('Web3Forms error, falling back to mailto:', err);
       // Fallback to mailto
       const recipient = portfolioData.contactEmail || 'franzkingstein@outlook.com';
       const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
@@ -57,6 +61,7 @@ const Contact: React.FC = () => {
       );
       window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -104,6 +109,16 @@ const Contact: React.FC = () => {
               </div>
               <span className="info-value">
                 {portfolioData.contactLocation}
+              </span>
+            </div>
+
+            <div className="info-card">
+              <div className="info-header">
+                <span className="pulse-dot"></span>
+                <span className="info-label">Availability</span>
+              </div>
+              <span className="info-value">
+                Open to internships & collaborations
               </span>
             </div>
 

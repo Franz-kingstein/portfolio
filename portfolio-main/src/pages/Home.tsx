@@ -1,12 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowDown, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Github, Linkedin, Mail, ChevronDown, Download } from 'lucide-react';
 import { useAdmin } from '../contexts/AdminContext';
 import './Home.css';
 import Spline from '@splinetool/react-spline';
 
 const Home: React.FC = () => {
   const { portfolioData } = useAdmin();
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const titles = useMemo(() => ['Data Scientist', 'AI Specialist', 'Full Stack Developer', 'ML Engineer'], []);
+
+  useEffect(() => {
+    const currentTitle = titles[currentTitleIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting && displayedText !== currentTitle) {
+      // Typing forward
+      timer = setTimeout(() => {
+        setDisplayedText(currentTitle.substring(0, displayedText.length + 1));
+      }, 60);
+    } else if (isDeleting && displayedText !== '') {
+      // Deleting backward
+      timer = setTimeout(() => {
+        setDisplayedText(displayedText.substring(0, displayedText.length - 1));
+      }, 40);
+    } else if (!isDeleting && displayedText === currentTitle) {
+      // Pause before deleting
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000);
+    } else if (isDeleting && displayedText === '') {
+      // Move to next title
+      setIsDeleting(false);
+      setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, currentTitleIndex, titles]);
 
   const scrollToNext = () => {
     const aboutSection = document.getElementById('about');
@@ -24,6 +56,9 @@ const Home: React.FC = () => {
         <div className="hero-spline-bg" aria-hidden="true">
           <Spline scene="https://prod.spline.design/ftrzbXlLq8aDF8h4/scene.splinecode" />
         </div>
+
+        {/* Soft purple radial glow behind robot */}
+        <div className="hero-radial-glow"></div>
       </div>
       
       <div className="container">
@@ -38,7 +73,11 @@ const Home: React.FC = () => {
               </h1>
               
               <p className="hero-subtitle">
-                {portfolioData.heroSubtitle}
+                <span className="typing-prefix">I'm a </span>
+                <span className="typing-text">
+                  {displayedText}
+                  <span className="typing-cursor">|</span>
+                </span>
               </p>
               
               <div className="hero-buttons">
@@ -54,6 +93,21 @@ const Home: React.FC = () => {
                 }}>
                   Get In Touch
                 </a>
+                <a href="/resume.pdf" className="btn btn-resume" download>
+                  <Download size={18} />
+                  Download Resume
+                </a>
+              </div>
+
+              {/* Subtle Inline Stat Row */}
+              <div className="hero-stat-strip">
+                <span>23+ Projects</span>
+                <span className="stat-separator">|</span>
+                <span>5+ Domains</span>
+                <span className="stat-separator">|</span>
+                <span className="stat-open-work">
+                  Open to Work <span className="pulse-dot-green">●</span>
+                </span>
               </div>
               
               <div className="social-links">
@@ -64,6 +118,7 @@ const Home: React.FC = () => {
                   aria-label="GitHub"
                 >
                   <Github size={24} />
+                  <span className="tooltip-text">GitHub</span>
                 </a>
                 <a 
                   href={portfolioData.socialLinks.linkedin} 
@@ -72,12 +127,14 @@ const Home: React.FC = () => {
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={24} />
+                  <span className="tooltip-text">LinkedIn</span>
                 </a>
                 <a 
                   href={portfolioData.socialLinks.email}
                   aria-label="Email"
                 >
                   <Mail size={24} />
+                  <span className="tooltip-text">Email</span>
                 </a>
                 <a 
                   href={(portfolioData as any).socialLinks.medium} 
@@ -85,10 +142,10 @@ const Home: React.FC = () => {
                   rel="noopener noreferrer"
                   aria-label="Medium"
                 >
-                  {/* Using Mail icon placeholder removed Twitter; you can add a Medium SVG later */}
                   <svg width="24" height="24" viewBox="0 0 1043.63 592.71" aria-hidden="true" focusable="false">
                     <path d="M588.67 296.35c0 163.68-131.92 296.36-294.34 296.36S0 460.03 0 296.35 131.92 0 294.33 0s294.34 132.68 294.34 296.35M911.44 296.35c0 154.23-65.96 279.33-147.36 279.33s-147.36-125.1-147.36-279.33 65.96-279.33 147.36-279.33 147.36 125.1 147.36 279.33m132.19 0c0 141.02-24.64 255.33-55.02 255.33s-55.02-114.31-55.02-255.33 24.64-255.33 55.02-255.33 55.02 114.31 55.02 255.33" fill="currentColor"/>
                   </svg>
+                  <span className="tooltip-text">Medium</span>
                 </a>
               </div>
             </div>

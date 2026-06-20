@@ -1,927 +1,535 @@
-/* --- Feature Section --- */
-.features {
-  background: var(--bg-primary);
+/* =================================== */
+/* 1. SECTION LAYOUT & HEADER
+/* =================================== */
+.features-section {
+  padding: 6rem 0;
+  background: #0A0A0F;
+  width: 100%;
+  color: #E8E8F0;
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background: var(--bg-secondary);
-  padding: 2.5rem;
-  border-radius: 20px;
+.section-label { 
+  color: #1D9E75; 
+  font-family: monospace; 
+  font-size: 14px; 
+  margin-bottom: 8px; 
   text-align: center;
-  box-shadow: 0 10px 30px var(--shadow);
-  transition: var(--transition);
-  border: 1px solid var(--border-color);
+  display: block;
+}
+.section-title { 
+  font-size: 52px; 
+  font-weight: 700; 
+  color: #E8E8F0; 
+  margin: 0 0 12px; 
+  text-align: center;
+}
+.section-underline { 
+  width: 60px; 
+  height: 4px; 
+  background: linear-gradient(90deg, #7F77DD, #1D9E75); 
+  border-radius: 2px; 
+  margin: 0 auto 16px; 
+}
+.section-subtitle { 
+  color: #9999B0; 
+  font-size: 16px; 
+  text-align: center;
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px var(--shadow-hover);
+.features-container {
+  width: 100%;
+  margin: 0 auto;
 }
 
-.feature-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
-  border-radius: 50%;
-  color: white;
-  margin-bottom: 1.5rem;
+.features-header {
+  margin-bottom: 48px;
+  text-align: center;
 }
 
-.feature-card h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
+.section-tag {
+  font-size: 13px;
+  color: #1D9E75;
+  font-family: monospace;
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
 }
 
-.feature-stats {
-  margin-bottom: 1.5rem;
-}
-
-.stat-number {
-  font-size: 3rem;
+.section-heading {
+  font-size: 52px;
   font-weight: 700;
-  color: var(--accent-primary);
-  line-height: 1;
-}
-
-.stat-label {
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin-top: 0.5rem;
-}
-
-.feature-items {
-  margin-bottom: 1.5rem;
-}
-
-.feature-item {
-  background: var(--bg-primary);
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 10px;
-  color: var(--text-primary);
-  font-weight: 500;
-  border: 1px solid var(--border-color);
-  transition: var(--transition);
-}
-
-.feature-item:hover {
-  background: var(--accent-primary);
-  color: white;
-  transform: translateX(5px);
-}
-
-.feature-description {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  font-size: 0.9rem;
-}
-
-/* --- Embedded Image Cards --- */
-.embed-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.embed-title {
+  color: #E8E8F0;
+  line-height: 1.1;
   margin: 0;
-  font-size: 1.25rem;
 }
 
-.responsive-img {
+.section-underline {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #7F77DD, #1D9E75);
+  border-radius: 2px;
+  margin: 14px 0 12px 0;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #9999B0;
+  margin: 0;
+}
+
+/* Generic Card Header Tag */
+.card-header-tag {
+    font-size: 12px;
+    color: #1D9E75;
+    font-family: monospace;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* =================================== */
+/* 2. ROW 1 — ANIMATED COUNTER CARDS
+/* =================================== */
+.stats-row-1 {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
   width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-primary);
 }
 
-.stats-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-@media (min-width: 700px) {
-  .stats-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.embed-link {
-  color: var(--accent-primary);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.embed-link:hover {
-  text-decoration: underline;
-}
-
-/* --- Stat Panels --- */
-.stats-section {
-  margin-bottom: 2rem;
-}
-
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-.stat-panel {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+.stat-counter-card {
+  background: #111118;
+  border: 1px solid rgba(127, 119, 221, 0.15);
   border-radius: 16px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 10px 30px var(--shadow);
-}
-
-.stat-img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 0.5rem;
-}
-
-@media (max-width: 1024px) {
-  .stats-row {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .stats-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --- Dashboard Section --- */
-.features.dashboard {
-  /* Changed background to be lighter */
-  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
-  min-height: 100vh;
-  padding: clamp(4rem, 6vh, 5rem) 1rem 2rem;
-  display: auto;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-[data-theme="dark"] .features.dashboard {
-  /* Slightly lighter dark mode background */
-  background: linear-gradient(180deg, #1a1a1a 0%, #1f1f1f 100%);
-}
-
-/* Dashboard container - adjust these values to control the entire page layout */
-.dashboard-container {
-  width: calc(100vw - 2rem); /* Container width with 1rem gap on each side */
-  max-width: 1400px; /* Maximum width for very large screens */
-  min-height: calc(
-    100vh - 10rem
-  ); /* Container height with navbar and padding space */
-  height: auto; /* Auto height to accommodate content */
-  margin-top: 2rem; /* Top margin/position adjustment */
-  margin-left: auto; /* Horizontal centering */
-  margin-right: auto; /* Horizontal centering */
-  padding: 1rem; /* Internal spacing for content */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
-}
-
-/* FIXED: Improved Grid Layout with proper sizing */
-.dash-grid {
-  display: grid !important;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "graph stats langs"
-    "graph leet langs"
-    "cert cert cert";
-  gap: clamp(0.75rem, 1.5vw, 1.5rem);
-  width: 100%;
-  /* FIXED: Use auto height instead of 100% to prevent overflow */
-  height: auto;
-  margin-top: 0.5rem;
-}
-
-/* Force grid items to respect areas */
-.graph-tile {
-  grid-area: graph !important;
-}
-.gh-stats-tile {
-  grid-area: stats !important;
-}
-.gh-langs-tile {
-  grid-area: langs !important;
-}
-.leet-tile {
-  grid-area: leet !important;
-}
-.certs-tile {
-  grid-area: cert !important;
-}
-
-/* FIXED: Improved tile sizing with proper min-heights */
-.tile {
-  /* Lighter tile background with less opacity on the blue tint */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
-  ) !important;
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  /* Softer shadow */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  padding: clamp(1rem, 2vw, 1.5rem);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  min-height: clamp(200px, 25vh, 300px);
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* FIXED: Specific tile styling with better proportions */
-.graph-tile {
-  /* Lighter graph tile */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.08) /* Reduced from 0.15 */
-  ) !important;
-  /* FIXED: Larger min-height for graph tile */
-  min-height: clamp(300px, 40vh, 500px);
-}
-
-.gh-stats-tile {
-  /* Lighter stats tile */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
-  ) !important;
-  /* FIXED: Adequate height for stats */
-  min-height: clamp(180px, 22vh, 250px);
-}
-
-.gh-langs-tile {
-  /* Lighter langs tile */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
-  ) !important;
-  /* FIXED: Height spans two rows effectively */
-  min-height: clamp(360px, 45vh, 520px);
-}
-
-.leet-tile {
-  /* Lighter leet tile */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.05) /* Reduced from 0.1 */
-  ) !important;
-  /* FIXED: Adequate height for LeetCode stats */
-  min-height: clamp(180px, 22vh, 250px);
-}
-
-.certs-tile {
-  /* Lighter certs tile */
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary),
-    rgba(59, 130, 246, 0.04) /* Reduced from 0.08 */
-  ) !important;
-  /* Revert to standard height behavior */
-  min-height: clamp(350px, 45vh, 500px);
-  height: auto;
-  animation-delay: 1.2s;
-  overflow: hidden !important;
-  display: flex;
-  flex-direction: column;
-}
-
-.tile:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 50px var(--shadow-hover);
-}
-
-.tile-header {
-  font-weight: 700;
-  color: var(--text-primary);
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
-  margin: 0;
+  padding: 24px 20px;
   text-align: center;
-  /* FIXED: Prevent header from taking too much space */
-  flex-shrink: 0;
+  flex: 1;
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 0;
+  box-shadow: inset 0 -2px 0 #7F77DD;
 }
 
-/* FIXED: Improved media sizing to prevent overflow */
-.tile-media {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  /* FIXED: Use flex-grow to fill available space without overflow */
-  flex: 1;
-  max-height: calc(100% - 3rem);
-  border-radius: 14px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-primary);
-  object-fit: contain;
+.stat-counter-card:hover {
+  border-color: rgba(127, 119, 221, 0.5);
+  box-shadow: 0 0 24px rgba(127, 119, 221, 0.1);
+  transform: translateY(-4px);
+}
+
+.stat-card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
   display: block;
 }
 
-/* FIXED: Specific media sizing for different tiles */
-.graph-media {
-  width: 100%;
-  height: auto;
-  max-height: calc(100% - 3rem);
-  border-radius: 14px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-primary);
-  object-fit: contain;
-  flex: 1;
+.stat-card-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7F77DD, #1D9E75);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  line-height: 1;
 }
 
-/* FIXED: GitHub Stats and LeetCode specific sizing */
-.gh-stats-tile .tile-media,
-.leet-tile .tile-media {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  flex: 1;
-  max-height: calc(100% - 3rem);
-  object-fit: contain;
-  aspect-ratio: 16 / 9;
+.stat-card-suffix {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #7F77DD, #1D9E75);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-/* FIXED: Languages tile media sizing */
-.gh-langs-tile .tile-media {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  flex: 1;
-  max-height: calc(100% - 3rem);
-  object-fit: contain;
+.stat-card-label {
+  font-size: 14px;
+  color: #9999B0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
 }
 
-/* Certificates Section - FIXED */
-.certs-tile {
-  display: flex;
-  flex-direction: column;
-}
-
-.certs-tile .cert-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex: 1;
-  overflow: hidden;
-}
-
-.cert-showcase {
+/* =================================== */
+/* 3. ROW 2 — GITHUB SECTION
+/* =================================== */
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   width: 100%;
+  margin-bottom: 24px;
 }
 
-.cert-item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.github-graph-card {
+  grid-column: span 2;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  height: 100%;
-  /* Softer shadow for cert items */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-/* Animation delays for certificate items */
-.cert-item:nth-child(1) {
-  animation-delay: 1.4s;
-}
-.cert-item:nth-child(2) {
-  animation-delay: 1.5s;
-}
-.cert-item:nth-child(3) {
-  animation-delay: 1.6s;
-}
-.cert-item:nth-child(4) {
-  animation-delay: 1.7s;
-}
-.cert-item:nth-child(5) {
-  animation-delay: 1.8s;
-}
-.cert-item:nth-child(6) {
-  animation-delay: 1.9s;
-}
-
-.cert-item:hover {
-  transform: translateY(-5px);
-  /* Softer hover shadow */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-}
-
-.cert-image {
-  width: 100%;
+  background: #111118;
+  border: 1px solid rgba(127, 119, 221, 0.15);
+  border-radius: 16px;
+  padding: 1.25rem;
   height: auto;
-  /* FIXED: Increased certificate image height */
-  max-height: 180px;
-  object-fit: contain;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  min-height: 0;
+}
+
+.github-graph-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.github-contribution-graph {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Styling the SVG chart */
+.github-contribution-graph .dots,
+.github-contribution-graph text {
+  display: none; /* Hide original text and dots if any */
+}
+
+.github-contribution-graph rect[data-level="0"] {
+  fill: var(--heatmap-color-0);
+}
+.github-contribution-graph rect[data-level="1"] {
+  fill: var(--heatmap-color-1);
+}
+.github-contribution-graph rect[data-level="2"] {
+  fill: var(--heatmap-color-2);
+}
+.github-contribution-graph rect[data-level="3"] {
+  fill: var(--heatmap-color-3);
+}
+.github-contribution-graph rect[data-level="4"] {
+  fill: var(--heatmap-color-4);
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-color-secondary);
+  width: 100%;
+  padding-right: 1rem; /* Align with graph */
+  margin-top: 8px;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+
+.github-stats-card {
+  grid-column: span 1;
+}
+
+.languages-card {
+  grid-column: span 1;
+}
+
+.github-stats-card, .languages-card {
+  background: #111118;
+  border: 1px solid rgba(127, 119, 221, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.github-stat-item {
+  background: rgba(127, 119, 221, 0.05);
+  border: 1px solid rgba(127, 119, 221, 0.1);
   border-radius: 12px;
-  box-shadow: 0 10px 30px var(--shadow);
-  flex: 1;
+  padding: 16px;
+  text-align: center;
 }
 
-.cert-item h4 {
-  color: var(--text-primary);
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 0.5rem 0 0.25rem 0;
-  /* FIXED: Allow text wrapping for long titles */
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+.github-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7F77DD, #1D9E75);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.cert-item p {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  margin: 0;
-  /* FIXED: Allow text wrapping */
-  white-space: normal;
+.github-stat-label {
+  font-size: 11px;
+  color: #9999B0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
 }
 
-/* FIXED: Responsive Dashboard Layout */
-@media (max-width: 1400px) {
-  .dash-grid {
-    grid-template-columns: 1.8fr 1fr 1fr;
-    gap: clamp(0.75rem, 1.2vw, 1.2rem);
-  }
+.languages-list .language-item {
+    margin-bottom: 12px;
 }
 
-@media (max-width: 1200px) {
-  .dash-grid {
+.language-item-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.language-name {
+  font-size: 13px;
+  color: #E8E8F0;
+  font-weight: 500;
+}
+
+.language-percent {
+  color: #1D9E75;
+  font-size: 13px;
+}
+
+.language-bar-track {
+  background: rgba(255, 255, 255, 0.06);
+  height: 6px;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.language-bar-fill {
+  background: linear-gradient(90deg, #7F77DD, #1D9E75);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.language-repo-count {
+  font-size: 11px;
+  color: #9999B0;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* =================================== */
+/* 4. ROW 3 — LEETCODE + SKILLS
+/* =================================== */
+.leetcode-card {
+  grid-column: span 1;
+  background: #111118;
+  border: 1px solid rgba(127, 119, 221, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.skills-card {
+  grid-column: span 1;
+  background: #111118;
+  border: 1px solid rgba(127, 119, 221, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.leetcode-stats-content {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.leetcode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.leetcode-username, .leetcode-ranking {
+    font-size: 14px;
+    color: #9999B0;
+}
+
+.leetcode-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+}
+
+.leetcode-total-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #7F77DD;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.total-solved-value {
+    color: #E8E8F0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.total-solved-label {
+    font-size: 11px;
+    color: #9999B0;
+}
+
+.leetcode-problems {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.problem-item-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+
+.problem-label.easy { color: #1D9E75; }
+.problem-label.medium { color: #F5A623; }
+.problem-label.hard { color: #E24B4A; }
+
+.problem-count {
+    color: #9999B0;
+}
+
+.problem-bar {
+    background: rgba(255, 255, 255, 0.06);
+    height: 6px;
+    border-radius: 3px;
+}
+
+.problem-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+}
+.problem-bar-fill.easy { background: #1D9E75; }
+.problem-bar-fill.medium { background: #F5A623; }
+.problem-bar-fill.hard { background: #E24B4A; }
+
+.skills-list .skill-bar-item {
+  margin-bottom: 16px;
+}
+
+.skill-bar-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.skill-bar-name {
+  font-size: 13px;
+  color: #E8E8F0;
+}
+
+.skill-bar-percent {
+  font-size: 13px;
+}
+
+.skill-bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.skill-bar-fill {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7F77DD, #1D9E75);
+  transition: width 1.5s ease;
+}
+
+/* =================================== */
+/* 6. DARK THEME & LOADING
+/* =================================== */
+.features-section.dark {
+    /* All colors are dark by default */
+}
+.loading-placeholder {
+    color: #9999B0;
+    text-align: center;
+    padding: 40px 0;
+}
+/* Ensure no light backgrounds */
+.github-contribution-graph,
+.leetcode-stats-content,
+.stat-counter-card,
+.github-graph-card,
+.github-stats-card,
+.languages-card,
+.leetcode-card,
+.skills-card {
+    background-color: #111118;
+}
+
+/* =================================== */
+/* 7. MOBILE RESPONSIVE
+/* =================================== */
+@media (max-width: 1024px) {
+  .stats-row-1 {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-      "graph graph"
-      "stats langs"
-      "leet langs"
-      "cert cert";
-    gap: 1rem;
   }
-
-  /* FIXED: Adjust tile heights for medium screens */
-  .graph-tile {
-    min-height: clamp(250px, 30vh, 350px);
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  .gh-stats-tile,
-  .leet-tile {
-    min-height: clamp(160px, 20vh, 220px);
+  .github-graph-card {
+    grid-column: span 2;
   }
-
-  .gh-langs-tile {
-    min-height: clamp(320px, 40vh, 450px);
+  .github-stats-card, .leetcode-card, .languages-card, .skills-card {
+    grid-column: span 1;
   }
 }
 
 @media (max-width: 768px) {
-  .features.dashboard {
-    padding: clamp(2rem, 3vh, 2.5rem) 0.5rem clamp(1rem, 2vh, 1.5rem);
+  .features-section {
+    padding: 4rem 0;
   }
-
-  .dashboard-container {
-    /* Mobile: smaller gaps but still maintain breathing room */
-    width: calc(100vw - 2rem); /* 1rem gap on each side for mobile */
-    max-width: 100%;
-    min-height: calc(100vh - 8rem);
-    margin-top: 1rem;
-    padding: 0.75rem;
-  }
-
-  .dash-grid {
+  .stats-grid {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "graph"
-      "stats"
-      "langs"
-      "leet"
-      "cert";
-    gap: 1rem;
-    /* FIXED: Remove fixed height on mobile */
-    height: auto;
+    gap: 20px;
   }
-
-  /* FIXED: Mobile tile heights */
-  .tile {
-    border-radius: 16px;
-    min-height: clamp(180px, 22vh, 250px);
-    padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  .github-graph-card, .github-stats-card, .leetcode-card, .languages-card, .skills-card {
+    grid-column: span 1;
   }
-
-  .graph-tile {
-    min-height: clamp(220px, 28vh, 320px);
-  }
-
-  .gh-stats-tile,
-  .leet-tile {
-    min-height: clamp(160px, 20vh, 200px);
-  }
-
-  .gh-langs-tile {
-    min-height: clamp(240px, 30vh, 300px);
-  }
-
-  .certs-tile {
-    min-height: clamp(320px, 40vh, 420px);
-  }
-
-  /* FIXED: Mobile certificate showcase */
-  .cert-showcase {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0.75rem;
-  }
-
-  .cert-item {
-    min-height: 200px;
-    max-height: 250px;
-    padding: 0.75rem;
-  }
-
-  .cert-image {
-    max-height: 140px;
+  .stat-counter-card {
+    padding: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .features.dashboard {
-    padding: 1.5rem 0.25rem 1rem;
+  .features-section {
+    padding: 3rem 0;
   }
-
-  .dashboard-container {
-    /* Small mobile: minimal gaps but still clean */
-    width: calc(100vw - 1rem); /* 0.5rem gap on each side for small screens */
-    margin-top: 0.5rem;
-    padding: 0.5rem;
+  .section-heading {
+    font-size: 44px; /* 52 * 0.85 */
   }
-
-  .dash-grid {
-    gap: 0.75rem;
+  .stat-card-number {
+    font-size: 37px; /* 44 * 0.85 */
   }
-
-  .tile {
-    padding: 0.75rem;
-    min-height: clamp(160px, 20vh, 200px);
+  .github-stat-value {
+    font-size: 24px; /* 28 * 0.85 */
   }
-
-  .graph-tile {
-    min-height: clamp(200px, 25vh, 280px);
+  .stats-row-1 {
+    gap: 16px;
   }
-
-  .certs-tile {
-    min-height: clamp(280px, 35vh, 360px);
-  }
-
-  /* FIXED: Small screen certificate layout */
-  .cert-showcase {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .cert-item {
-    min-height: 180px;
-    max-height: 220px;
-  }
-
-  .cert-image {
-    max-height: 120px;
-  }
-
-  .cert-item h4 {
-    font-size: 0.85rem;
-  }
-
-  .cert-item p {
-    font-size: 0.75rem;
-  }
-}
-
-/* FIXED: Ensure images load properly and don't cause layout shifts */
-.tile-media,
-.graph-media,
-.cert-image {
-  /* Prevent layout shift during image loading */
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-}
-
-/* FIXED: Error state for failed image loads */
-.tile-media:not([src]),
-.graph-media:not([src]),
-.cert-image:not([src]) {
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    var(--border-color) 30%,
-    var(--border-color) 70%,
-    transparent 70%
-  );
-  background-size: 20px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.tile-media:not([src])::after,
-.graph-media:not([src])::after,
-.cert-image:not([src])::after {
-  content: "Image loading...";
-}
-
-/* FIXED: Prevent text overflow in all tiles */
-.tile * {
-  box-sizing: border-box;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-/* FIXED: Very large screen optimizations */
-@media (min-width: 1600px) {
-  .dashboard-container {
-    width: calc(100vw - 4rem); /* Moderate gaps for very large screens */
-    max-width: 1600px; /* Increased max width for large screens */
-    padding: 1.5rem;
-  }
-
-  .dash-grid {
-    gap: 1.5rem;
-  }
-
-  .tile {
-    min-height: clamp(250px, 28vh, 350px);
-    padding: 2rem;
-  }
-
-  .graph-tile {
-    min-height: clamp(350px, 42vh, 550px);
-  }
-
-  .gh-langs-tile {
-    min-height: clamp(450px, 52vh, 650px);
-  }
-
-  .certs-tile {
-    min-height: clamp(400px, 48vh, 550px);
-  }
-}
-
-/* FIXED: Ultra-wide screen support */
-@media (min-width: 2000px) {
-  .dashboard-container {
-    width: calc(100vw - 6rem); /* Balanced gaps for ultra-wide screens */
-    max-width: 1800px; /* Maximum sensible width */
-    padding: 2rem;
-  }
-
-  .dash-grid {
-    grid-template-columns: 2.2fr 1fr 1fr;
-    max-width: none; /* Remove max-width constraint from grid */
-    margin: 0;
-  }
-}
-
-/* --- Playbook Scroll Animation --- */
-/* The following classes are no longer used and can be removed or ignored */
-.playbook-container,
-.playbook-grid,
-.playbook-layer,
-.playbook-item,
-.playbook-scaler,
-.scaler-info {
-  display: none;
-}
-
-/* --- Custom GitHub Stats --- */
-.custom-github-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  height: 100%;
-  justify-content: center;
-}
-
-.stat-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  background: rgba(var(--accent-primary-rgb), 0.05);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.stat-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* --- Custom LeetCode Stats --- */
-.custom-leetcode-stats {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.5rem;
-  height: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.leetcode-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.circle-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: white;
-  line-height: 1;
-}
-
-.circle-label {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 0.5rem;
-}
-
-.leetcode-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.difficulty {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: rgba(var(--accent-primary-rgb), 0.05);
-  border-radius: 10px;
-  border-left: 4px solid var(--border-color);
-}
-
-.difficulty.easy {
-  border-left-color: #52c41a;
-}
-
-.difficulty.medium {
-  border-left-color: #faad14;
-}
-
-.difficulty.hard {
-  border-left-color: #f5222d;
-}
-
-.difficulty-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  min-width: 60px;
-  font-weight: 500;
-}
-
-.difficulty-count {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-left: auto;
-}
-
-/* --- Custom Languages Used --- */
-.custom-languages {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  height: 100%;
-  justify-content: center;
-}
-
-.language-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.lang-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.25rem;
-}
-
-.lang-name {
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-}
-
-.lang-percent {
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 0.9rem;
-}
-
-.lang-bar {
-  width: 100%;
-  height: 8px;
-  background: rgba(var(--accent-primary-rgb), 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-}
-
-.lang-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
-
-.lang-count {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-weight: 500;
 }
 
